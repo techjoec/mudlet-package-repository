@@ -4,9 +4,10 @@ on:
   push:
     paths:
       - 'packages/**'
+      - 'packages/mpkg.packages.json'
   pull_request:
     paths:
-      - 'packages/**'
+      - '**'
 
 jobs:
   scan:
@@ -20,7 +21,11 @@ jobs:
       - name: Run security scan
         id: scan
         run: |
-          python scripts/security_scan.py | tee scan.log
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            python scripts/security_scan.py --throttle 3 | tee scan.log
+          else
+            python scripts/security_scan.py --only-not-scanned --throttle 3 | tee scan.log
+          fi
         continue-on-error: true
       - name: Upload scan log
         uses: actions/upload-artifact@v3
