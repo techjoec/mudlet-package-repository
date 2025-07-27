@@ -20,6 +20,8 @@ SUSPICIOUS_PATTERNS = [
     r"http\.request",
 ]
 
+ALLOWED_EXTS = (".mpackage", ".zip", ".lua", ".xml", ".txt", ".json", ".md")
+
 
 def scan_content(content):
     found = []
@@ -31,11 +33,14 @@ def scan_content(content):
 
 def scan_package(path):
     results = {}
-    if path.endswith(".mpackage"):
+    archive_exts = (".mpackage", ".zip")
+    text_exts = (".lua", ".xml", ".txt", ".json", ".md")
+
+    if path.lower().endswith(archive_exts):
         try:
             with zipfile.ZipFile(path) as z:
                 for name in z.namelist():
-                    if not name.lower().endswith((".lua", ".xml", ".txt", ".json")):
+                    if not name.lower().endswith(text_exts):
                         continue
                     try:
                         data = z.read(name).decode("utf-8", errors="ignore")
@@ -47,6 +52,8 @@ def scan_package(path):
         except zipfile.BadZipFile:
             pass
     else:
+        if not path.lower().endswith(text_exts):
+            return results
         try:
             with open(path, "r", encoding="utf-8", errors="ignore") as f:
                 data = f.read()
@@ -76,7 +83,8 @@ def main(args):
         files_to_scan = []
         for root, dirs, files in os.walk("packages"):
             for f in files:
-                files_to_scan.append(os.path.join(root, f))
+                if os.path.splitext(f)[1].lower() in ALLOWED_EXTS:
+                    files_to_scan.append(os.path.join(root, f))
 
     for file_path in files_to_scan:
         res = scan_package(file_path)
