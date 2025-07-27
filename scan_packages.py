@@ -7,22 +7,23 @@ from pathlib import Path
 PATTERNS = {
     # explicit function calls that could execute external processes
     'Process Spawning': [
-        r'\bos\.execute\s*\(',
-        r'\bio\.popen\s*\(',
-        r'\bspawn\s*\('
+        (r'\bos\.execute\s*\(', 'os.execute'),
+        (r'\bio\.popen\s*\(', 'io.popen'),
+        (r'\bspawn\s*\(', 'spawn'),
     ],
     # network activity via LuaSocket or Mudlet helpers
     'External Communications': [
-        r'socket\.http',
-        r'https?://',
-        r'\bopenUrl\s*\(',
-        r'\bdownloadFile\s*\('
+        (r'require\s*\(?["\']socket\.http["\']\)?', 'require'),
+        (r'\bsocket\.http\s*[\.:]', 'socket.http'),
+        (r'\bopenUrl\s*\(', 'openUrl'),
+        (r'\bdownloadFile\s*\(', 'downloadFile'),
     ],
     # running code from strings or files
     'Unsafe Inputs': [
-        r'\bloadstring\s*\(',
-        r'\bdofile\s*\(',
-        r'\bloadfile\s*\('
+        (r'\bloadstring\s*\(', 'loadstring'),
+        (r'\bdofile\s*\(', 'dofile'),
+        (r'\bloadfile\s*\(', 'loadfile'),
+        (r'\bload\s*\(', 'load'),
     ],
 }
 
@@ -71,9 +72,12 @@ def find_matches(text, regexes, remaining):
     lines = text.splitlines()
     for idx, line in enumerate(lines, 1):
         for category, regs in regexes.items():
-            for reg in regs:
+            for reg, token in regs:
                 m = re.search(reg, line)
                 if m:
+                    if re.search(rf'(?:^|\s)(?:local\s+)?function\s+{re.escape(token)}\b', line) or \
+                       re.search(rf'{re.escape(token)}\s*=\s*function\b', line):
+                        continue
                     start = max(0, idx - CONTEXT_LINES - 1)
                     end = min(len(lines), idx + CONTEXT_LINES)
                     context = '\n'.join(lines[start:end])

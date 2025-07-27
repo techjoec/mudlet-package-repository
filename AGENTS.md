@@ -7,4 +7,5 @@
 - Do not mark packages as scanned; this repository is currently in testing.
 - When adding or modifying detection logic or hints, update this `AGENTS.md` and regenerate `scan_report.csv`.
 - The scanner strips Lua comments before matching to avoid false positives from commented-out code.
-- Detection also covers Mudlet networking helpers like `openUrl()` and `downloadFile()`.
+- Detection logic skips lines that define functions such as `openUrl = function(...)` to avoid false positives.
+- Network detection now matches `require('socket.http')`, `socket.http.request` and similar calls rather than any URL string.
