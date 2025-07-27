@@ -1,39 +1,431 @@
 package,file,line_number,category,matched,context
-mapaddons-safe-delete.mpackage,config.lua,9,External Communications,https://,"
----
-This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22719&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
-monk-combo-script-achaea.mpackage,config.lua,9,External Communications,https://,"
----
-This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2581&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
-ProgressDisplayinator.mpackage,config.lua,11,External Communications,https://,"Prolly works with other IREs too
+keypad-keybindings.mpackage,config.lua,9,External Communications,https://,"
 
-![image](https://github.com/demonnic/ProgressDisplayinator/assets/3660/3aed41fa-07eb-4cc3-a60b-fb9ba6a9ed11)
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2163&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+the-two-towers-exits-window.mpackage,config.lua,9,External Communications,https://,"
 
-"
-ProgressDisplayinator.mpackage,config.lua,16,External Communications,https://,"## Installation
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1628&sid=84928af0d42b4e223b12fcba497301e9) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+tapestries-wixxx-sorter.mpackage,config.lua,9,External Communications,https://,"
 
-`lua uninstallPackage(""ProgressDisplayinator"") installPackage(""https://github.com/demonnic/ProgressDisplayinator/releases/latest/download/ProgressDisplayinator.mpackage"")`
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1643&sid=84928af0d42b4e223b12fcba497301e9) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+inventory-lister.mpackage,config.lua,9,External Communications,https://,"
 
-## Usage"
-getvalueat.mpackage,config.lua,9,External Communications,https://,"
----
-This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22762&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
-MudletWTTR.mpackage,config.lua,3,External Communications,https://,"mpackage = [[MudletWTTR]]
-author = [[Demonnic]]
-title = [[Get the weather from https://wttr.in in a miniconsole]]
-description = [[# MudletWTTR
-"
-MudletWTTR.mpackage,config.lua,7,External Communications,https://,"
-This is a fun and silly package I threw together for displaying weather reports in a Mudlet miniconsole.
-It uses https://wttr.in to get the reports and then just runs it through ansi2decho to push to the miniconsole.
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22535&sid=b3b9fb53db9cbda5cdc5b4b95b472eed) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+bfind-scroll-buffer-find.mpackage,config.lua,9,External Communications,https://,"
 
-## Commands"
-simple-script-for-slothmud-ships.mpackage,config.lua,9,External Communications,https://,"
----
-This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=3205&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1515&sid=84928af0d42b4e223b12fcba497301e9) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+achaea-vodun-fashion-counter.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2355&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+shattered-isles-mapper.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2700&sid=654f4778bd2cdb19b5fee80867e1c315) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+oo-wrapper-for-mudlet-trigger-objects.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22855&sid=5a7771a7f60fc59e653267903efc59fd) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+Stressinator.mpackage,config.lua,8,External Communications,https://,"Ever want to torture your Mudlet profile and see how it holds up under pressure?
+
+If like me you answered ""Ohh, neat!"" then I threw this together after reading through the forum topic [Typical Trigger Performace](https://forums.mudlet.org/viewtopic.php?f=9&t=23089)
+
+## Installation"
+Stressinator.mpackage,config.lua,14,External Communications,https://,"You can use the following command in Mudlet to install the latest version:
+
+`lua uninstallPackage(""Stressinator"") installPackage(""https://github.com/demonnic/Stressinator/releases/latest/download/Stressinator.mpackage"")`
+
+After that, you can either use the same snippet, or the supplied `stressinator update` alias"
+PRS.mpackage,config.lua,8,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23126) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]
+version = [[1.8.0]]
+created = [[2023-09-28T17:08:53+0000]]"
+PRS.mpackage,demontools.lua,61,External Communications,http://,"
+local htmlHeader = [=[  <!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.01 Transitional//EN""
+""http://www.w3.org/TR/html4/loose.dtd"">
+<html>
+  <head>"
+PRS.mpackage,demontools.lua,65,External Communications,http://,"  <head>
+    <meta http-equiv=""Content-Type"" content=""text/html;charset=utf-8"" >
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <style type=""text/css"">
+      body {"
+PRS.mpackage,demontools.lua,79,External Communications,http://,"
+local htmlHeaderPattern = [=[  <!DOCTYPE HTML PUBLIC ""%-//W3C//DTD HTML 4.01 Transitional//EN""
+""http://www.w3.org/TR/html4/loose.dtd"">
+<html>
+  <head>"
+PRS.mpackage,demontools.lua,83,External Communications,http://,"  <head>
+    <meta http%-equiv=""Content%-Type"" content=""text/html;charset=utf%-8"" >
+    <link href='http://fonts.googleapis.com/css%?family=Droid%+Sans%+Mono' rel='stylesheet' type='text/css'>
+    <style type=""text/css"">
+      body {"
+PRS.mpackage,demontools.lua,98,Unsafe Inputs,loadstring(,"
+local function getValueAt(accessString)
+  local ok, err = pcall(loadstring(""return "" .. tostring(accessString)))
+  if ok then return err end
+  return nil, err"
+PRS.mpackage,emco.lua,1261,External Communications,https://,"  if strippedFormat ~= """" then
+    self.ae(funcName,
+            ""format contains invalid time format characters. Please see https://wiki.mudlet.org/w/Manual:Lua_Functions#getTime for formatting information"")
+  else
+    self.timestampFormat = format"
+PRS.mpackage,sug.lua,20,Unsafe Inputs,loadstring(,"
+local function getValueAt(accessString)
+  local ok, err = pcall(loadstring(""return "" .. tostring(accessString)))
+  if ok then return err end
+  return nil, err"
+info-here-table.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=3289&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+calendar-todo-list.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22439&sid=b3b9fb53db9cbda5cdc5b4b95b472eed) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+autowalker2.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1359&sid=77f29e53407d5a2046fa27119a2c55b0) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
 achaea-subdivisions-data-collecter.mpackage,config.lua,9,External Communications,https://,"
----
+
 This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2456&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
-monk-custom-tekura-combos-achaea.mpackage,config.lua,9,External Communications,https://,"
----
-This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2188&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+achaea-butterfly-counter.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2589&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+updated-screendump.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2249&sid=b3b9fb53db9cbda5cdc5b4b95b472eed) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+fix-tabs.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1570&sid=84928af0d42b4e223b12fcba497301e9) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+tls-mud-chat.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2868&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+MumeSpellTimers.mpackage,config.lua,7,External Communications,https://,"MumeSpellTimers keeps tracks of most types of spells, buffs, maluses, charmed mobs, blinds, sancs and stored spells and displays it in an interactive window that can be toggled on or off.
+
+![Image](https://github.com/Khazdul/MumeSpellTimers/releases/latest/download/Screenshot.png)
+
+### Usage"
+basic-archery-for-a-newb.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2981&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+enable-accessibility.mpackage,config.lua,27,External Communications,https://,"VoiceOver is text-to-speech (TTS) for Mac OS, but will skip reading text when there's lots of it coming on.
+
+This command configures a third-party TTS plugin called [mudlet-reader](https://github.com/tspivey/mudlet-reader) to alleviate this issue.
+
+See [Accessibility on OSX](https://wiki.mudlet.org/w/Accessibility_on_OSX) for more information."
+enable-accessibility.mpackage,config.lua,29,External Communications,https://,"This command configures a third-party TTS plugin called [mudlet-reader](https://github.com/tspivey/mudlet-reader) to alleviate this issue.
+
+See [Accessibility on OSX](https://wiki.mudlet.org/w/Accessibility_on_OSX) for more information.
+]]
+version = [[2]]"
+achaea-shard-counter.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1998&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+coding-minipackage.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2435&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+simple-logger.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1424&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+QuickOutput.mpackage,config.lua,14,External Communications,https://,"Run the following command in Mudlet:
+```
+lua uninstallPackage(""QuickOutput"");installPackage(""https://github.com/ironcross32/QuickOutput-for-Mudlet/releases/latest/download/QuickOutput.mpackage"")
+```
+"
+QuickOutput.mpackage,config.lua,22,External Communications,https://,"
+### Note
+since this package binds keys to CTRL+&lt;number&gt;, it overrides Mudlet's default behavior of jumping to a particular tab. As this package is designed to run along side [ChannelHistory](https://github.com/ironcross32/ChannelHistory), which uses Alt+&lt;number&gt; for its most recent history per category, these keybindings cannot change. Thus, for those wishing to use these two packages in tandem, while preserving the ability to jump between multiple profiles, it will be necessary to change the following option within the, ""Special Options"" tab in preferences:
+* Switch between input line and main window using:
+F6 is recommended for users who wish to retain their ability to use tab auto-completion, however, tab may be a good choice for those who do not use it."
+convert-arbitrary-string-to-color-consistently.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22752&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+echo.mpackage,config.lua,12,External Communications,https://,"All act as if the given text came from the game itself and will fire any matching triggers.  
+
+See [Triggers](https://wiki.mudlet.org/w/Manual:Introduction#Triggers) for further information on matching text.
+  
+## `echo Alias"
+echo.mpackage,config.lua,24,External Communications,https://,"> `echo This is a sample line from the game$$And this is a new line.
+```
+See [echo](https://wiki.mudlet.org/w/Manual:Lua_Functions#echo), [feedTriggers](https://wiki.mudlet.org/w/Manual:Lua_Functions#feedTriggers), 
+  
+## `cecho Alias"
+echo.mpackage,config.lua,34,External Communications,https://,"> `cecho <green:red>green on red<r> reset$$<124:100>foreground of ANSI124 and background of ANSI100<r>
+```
+See [cecho](https://wiki.mudlet.org/w/Manual:Lua_Functions#cecho), [cfeedTriggers](https://wiki.mudlet.org/w/Manual:Lua_Functions#cfeedTriggers).
+
+## `decho Alias"
+echo.mpackage,config.lua,44,External Communications,https://,"> `decho <0,128,0:128,0,0>green on red<r> reset
+```
+See [decho](https://wiki.mudlet.org/w/Manual:Lua_Functions#decho), [dfeedTriggers](https://wiki.mudlet.org/w/Manual:Lua_Functions#dfeedTriggers).
+
+## `hecho Alias"
+echo.mpackage,config.lua,54,External Communications,https://,"> `hecho #008000,800000green on red#r reset
+```
+See [hecho](https://wiki.mudlet.org/w/Manual:Lua_Functions#hecho), [hfeedTriggers](https://wiki.mudlet.org/w/Manual:Lua_Functions#hfeedTriggers).
+]]
+version = [[1]]"
+mapaddons-safe-delete.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22719&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+simutronics-login-for-mudlet-3_0_0-delta.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=4780&sid=654f4778bd2cdb19b5fee80867e1c315) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+quickly-download-packages.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22757&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+MDK.mpackage,config.lua,11,External Communications,https://,"## Documentation
+
+The [MDK wiki](https://github.com/demonnic/MDK/wiki) contains an entry for each module or class, as well as examples.
+
+Starting with alpha2 of the MDK, the ldocs generated from code are included in the zipped releases. The current release's ldocs can always be viewed at <https://demonnic.github.io/mdk/current/>"
+MDK.mpackage,config.lua,13,External Communications,https://,"The [MDK wiki](https://github.com/demonnic/MDK/wiki) contains an entry for each module or class, as well as examples.
+
+Starting with alpha2 of the MDK, the ldocs generated from code are included in the zipped releases. The current release's ldocs can always be viewed at <https://demonnic.github.io/mdk/current/>
+
+## Installation"
+MDK.mpackage,config.lua,22,External Communications,https://,"
+You just want to get your hands on the goods, and aren't looking to use any MDK items in an exported package for sharing or anything like that.
+Well, you are who the mdk mpackage is for! Download the MDK.mpackage from your desired release on the [Releases](https://github.com/demonnic/MDK/releases) page and install it in the package manager. The examples in the [wiki](https://demonnic.github.io/mdk/current/) are written with this in mind, and you would require the items you need as `local EMCO = require(""MDK.emco"")`
+
+### I am a package author looking to include/use one of the MDK modules or classes in my package"
+MDK.mpackage,config.lua,26,External Communications,https://,"### I am a package author looking to include/use one of the MDK modules or classes in my package
+
+You should download the `demonnic-MDK-<version>.zip` file for your desired release on the [Releases](https://github.com/demonnic/MDK/releases) page.
+Inside are the individual .lua files for the modules and classes described in the [wiki](https://demonnic.github.io/mdk/current/) and [API docs](https://demonnic.github.io/mdk/current/).
+You can include all of them if you wish, or only the ones you actually make use of. I ask that you include the LICENSE.lua or LICENSE-MDK.lua file (depending on the release) file in addition."
+MDK.mpackage,config.lua,27,External Communications,https://,"
+You should download the `demonnic-MDK-<version>.zip` file for your desired release on the [Releases](https://github.com/demonnic/MDK/releases) page.
+Inside are the individual .lua files for the modules and classes described in the [wiki](https://demonnic.github.io/mdk/current/) and [API docs](https://demonnic.github.io/mdk/current/).
+You can include all of them if you wish, or only the ones you actually make use of. I ask that you include the LICENSE.lua or LICENSE-MDK.lua file (depending on the release) file in addition.
+They should go in the root of your package, so that when your package is installed the files can be found at `getMudletHomeDir() .. ""/<packagename>/emco.lua""`. You would then use `local EMCO = require(""<mypackagename>.emco"")`"
+MDK.mpackage,config.lua,39,External Communications,https://,"
+* aliasmgr.ua
+  * Object to manage tempAliases programmatically. <https://github.com/demonnic/MDK/wiki/AliasMgr>
+  
+* chyron.lua"
+MDK.mpackage,config.lua,42,External Communications,https://,"  
+* chyron.lua
+  * Label which moves a message across its face from right to left, like a stock ticker or the news chyrons. Documentation at <https://github.com/demonnic/MDK/wiki/Chyron>
+
+* demontools.lua"
+MDK.mpackage,config.lua,45,External Communications,https://,"
+* demontools.lua
+  * Collection of miscellaneous useful functions. You should include this file if you use the MDK, as several other modules make use of it. Include functions for converting c/d/hecho, html, and ansi colored strings between each other, mkdir_p, and some others. <https://github.com/demonnic/MDK/wiki/DemonTools>
+
+* emco.lua"
+MDK.mpackage,config.lua,48,External Communications,https://,"
+* emco.lua
+  * EMCO. Documentation at <https://github.com/demonnic/MDK/wiki/EMCO> Will make use of LoggingConsole if loggingconsole.lua and demontools.lua are included
+
+* figlet.lua"
+MDK.mpackage,config.lua,52,External Communications,https://,"* figlet.lua
+  * Creates FIGlets from strings
+  * Reference package with multiple fonts and color gradients at <https://github.com/demonnic/figinator>
+
+* ftext.lua"
+MDK.mpackage,config.lua,55,External Communications,https://,"
+* ftext.lua
+  * basic fText. Documentation at <https://github.com/demonnic/MDK/wiki/fText>
+  * now includes TextFormatter and TableMaker as ftext.TextFormatter and ftext.TableMaker
+"
+MDK.mpackage,config.lua,59,External Communications,https://,"
+* gradientmaker.lua
+  * Functions for creating color gradients for use with c/d/hecho. Documentation at <https://github.com/demonnic/MDK/wiki/GradientMaker>
+
+* loggingconsole.lua"
+MDK.mpackage,config.lua,65,External Communications,https://,"
+* loginator.lua
+  * Creates objects for logging messages to disk. <https://github.com/demonnic/MDK/wiki/Loginator>
+
+* mastermindsolver.lua"
+MDK.mpackage,config.lua,68,External Communications,https://,"
+* mastermindsolver.lua
+  * A class which will help you solve Master Mind puzzles. <https://github.com/demonnic/MDK/wiki/MasterMindSolver>
+
+* revisionator.lua"
+MDK.mpackage,config.lua,71,External Communications,https://,"
+* revisionator.lua
+  * A class which aims to make upgrading between package versions easier by storing and running patch functions. <https://github.com/demonnic/MDK/wiki/Revisionator>
+
+* sortbox.lua"
+MDK.mpackage,config.lua,74,External Communications,https://,"
+* sortbox.lua
+  * SortBox, an alternative to H/VBox which can be either, and also provides options for sorting its contents. Overview at <https://github.com/demonnic/MDK/wiki/SortBox>
+
+* spinbox.lua"
+MDK.mpackage,config.lua,77,External Communications,https://,"
+* spinbox.lua
+  * SpinBox, a Geyser element for adjusting numbers with your mouse. Overview at <https://github.com/demonnic/MDK/wiki/SpinBox>
+
+* sug.lua"
+MDK.mpackage,config.lua,80,External Communications,https://,"
+* sug.lua
+  * Self Updating Gauges, will watch a set of variables and update itself on a timer based on what values those variables hold. Documentation at <https://github.com/demonnic/MDK/wiki/SelfUpdatingGauge>
+
+* textgauge.lua"
+MDK.mpackage,config.lua,83,External Communications,https://,"
+* textgauge.lua
+  * TextGauges, what it says on the tin. Documentation at <https://github.com/demonnic/MDK/wiki/TextGauge>
+
+* timergauge.lua"
+MDK.mpackage,config.lua,86,External Communications,https://,"
+* timergauge.lua
+  * TimerGauge, an extension of Geyser.Gauge which serves as an animated countdown timer. Overview at <https://github.com/demonnic/MDK/wiki/TimerGauge>
+
+## Others people's work I depend upon"
+MDK.mpackage,config.lua,91,External Communications,https://,"
+* schema.lua
+  * lua-schema, for defining table schema. Documentation at <https://github.com/sschoener/lua-schema>
+  * will be used by Archon for ensuring configuration tables are as they should be.
+"
+MDK.mpackage,demontools.lua,61,External Communications,http://,"
+local htmlHeader = [=[  <!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.01 Transitional//EN""
+""http://www.w3.org/TR/html4/loose.dtd"">
+<html>
+  <head>"
+MDK.mpackage,demontools.lua,65,External Communications,http://,"  <head>
+    <meta http-equiv=""Content-Type"" content=""text/html;charset=utf-8"" >
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <style type=""text/css"">
+      body {"
+MDK.mpackage,demontools.lua,79,External Communications,http://,"
+local htmlHeaderPattern = [=[  <!DOCTYPE HTML PUBLIC ""%-//W3C//DTD HTML 4.01 Transitional//EN""
+""http://www.w3.org/TR/html4/loose.dtd"">
+<html>
+  <head>"
+MDK.mpackage,demontools.lua,83,External Communications,http://,"  <head>
+    <meta http%-equiv=""Content%-Type"" content=""text/html;charset=utf%-8"" >
+    <link href='http://fonts.googleapis.com/css%?family=Droid%+Sans%+Mono' rel='stylesheet' type='text/css'>
+    <style type=""text/css"">
+      body {"
+MDK.mpackage,demontools.lua,98,Unsafe Inputs,loadstring(,"
+local function getValueAt(accessString)
+  local ok, err = pcall(loadstring(""return "" .. tostring(accessString)))
+  if ok then return err end
+  return nil, err"
+MDK.mpackage,echofile.lua,15,Unsafe Inputs,loadstring(,"if _VERSION == ""Lua 5.1"" then
+  load = function(code, name, _, env)
+    local fn, err = loadstring(code, name)
+    if fn then
+      setfenv(fn, env)"
+MDK.mpackage,emco.lua,1261,External Communications,https://,"  if strippedFormat ~= """" then
+    self.ae(funcName,
+            ""format contains invalid time format characters. Please see https://wiki.mudlet.org/w/Manual:Lua_Functions#getTime for formatting information"")
+  else
+    self.timestampFormat = format"
+MDK.mpackage,loginator.lua,59,External Communications,http://,"
+local htmlHeaderTemplate = [=[  <!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.01 Transitional//EN""
+""http://www.w3.org/TR/html4/loose.dtd"">
+<html>
+  <head>"
+MDK.mpackage,loginator.lua,63,External Communications,http://,"  <head>
+    <meta http-equiv=""Content-Type"" content=""text/html;charset=utf-8"" >
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <style type=""text/css"">
+      body {"
+MDK.mpackage,loginator.lua,410,External Communications,openUrl(,"
+function Loginator:open()
+  openUrl(self:getFullFilename())
+end
+"
+MDK.mpackage,loginator.lua,415,External Communications,openUrl(,"
+function Loginator:openDir()
+  openUrl(self:getPath())
+end
+"
+MDK.mpackage,spinbox.lua,16,External Communications,https://,"  inactiveButtonColor = ""DimGray"",
+  integer = true,
+  upArrowLocation = ""https://demonnic.github.io/image-assets/uparrow.png"",
+  downArrowLocation = ""https://demonnic.github.io/image-assets/downarrow.png"",
+  color = ""#202020"""
+MDK.mpackage,spinbox.lua,17,External Communications,https://,"  integer = true,
+  upArrowLocation = ""https://demonnic.github.io/image-assets/uparrow.png"",
+  downArrowLocation = ""https://demonnic.github.io/image-assets/downarrow.png"",
+  color = ""#202020""
+}"
+MDK.mpackage,spinbox.lua,309,External Communications,downloadFile(,"    end
+    if upURL:match(""^http"") then
+      self:downloadFile(upURL, upFile)
+    elseif io.exists(upURL) then
+      upFile = upURL"
+MDK.mpackage,spinbox.lua,323,External Communications,downloadFile(,"    end
+    if downURL:match(""^http"") then
+      self:downloadFile(downURL, downFile)
+    elseif io.exists(downURL) then
+      downFile = downURL"
+MDK.mpackage,spinbox.lua,346,External Communications,downloadFile(,"
+
+function spinbox:downloadFile(url, fileName)
+  local parts = fileName:split(""/"")
+  parts[#parts] = nil"
+MDK.mpackage,spinbox.lua,371,External Communications,downloadFile(,"  registerNamedEventHandler(uname, handlerName .. ""done"", ""sysDownloadDone"", handler, true)
+  registerNamedEventHandler(uname, handlerName .. ""error"", ""sysDownloadError"", handler, true)
+  downloadFile(fileName, url)
+end
+"
+MDK.mpackage,sug.lua,20,Unsafe Inputs,loadstring(,"
+local function getValueAt(accessString)
+  local ok, err = pcall(loadstring(""return "" .. tostring(accessString)))
+  if ok then return err end
+  return nil, err"
+MDK.mpackage,timergauge.lua,236,Unsafe Inputs,loadstring(,"  local hooktype = type(hook)
+  if hooktype == ""string"" then
+    local f, e = loadstring(""return "" .. hook)
+    if not f then
+      f, e = loadstring(hook)"
+MDK.mpackage,timergauge.lua,238,Unsafe Inputs,loadstring(,"    local f, e = loadstring(""return "" .. hook)
+    if not f then
+      f, e = loadstring(hook)
+    end
+    if not f then"
+cron-daemon.mpackage,config.lua,14,External Communications,https://,"accuracy.
+
+Wish to see further additions to this script? Consider supporting my efforts at https://buymeacoffee.com/zookaongit
+
+### Usage"
+named-patterns-demo.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23040&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+achaean-rewear-script.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1411&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+alertness-with-mudlet-mapper-and-gmcp.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2305&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+multilingual-keyboad-movement-script.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1214&sid=950767665245f83dd17b6778919deaa7) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+wisr-reporter.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=4097&sid=e10434eaff93aec9299d6187daa41118) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+achaea-experience-script.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1274&sid=950767665245f83dd17b6778919deaa7) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+ire-ab-plus.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1346&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+tracking-script.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1767&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+moving-label-demo.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=20618&sid=bf709fdf857add149b1c794daa46579e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+simple-script-for-slothmud-ships.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=3205&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+copyToAda.mpackage,config.lua,3,External Communications,https://,"mpackage = [[copyToAda]]
+author = [[Demonnic]]
+title = [[Copy selected text as HTML to https://ada-young.com/pastebin/ using https://ada-young.com/pastebin/api/v1/about ]]
+description = [[# copyToAda
+"
+copyToAda.mpackage,config.lua,6,External Communications,https://,"description = [[# copyToAda
+
+## Send the selected text as HTML to https://ada-young.com/pastebin/
+This literally just adds a right-click menu option to send the selected text to ada-young as an html pastebin
+"
+copyToAda.mpackage,config.lua,13,External Communications,https://,"Copy and paste the following
+
+`lua installPackage(""https://github.com/demonnic/copyToAda/releases/latest/download/copyToAda.mpackage"")`
+]]
+version = [[1.0.0]]"
+tabbed-chat-script.mpackage,config.lua,9,External Communications,https://,"
+
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=171&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
