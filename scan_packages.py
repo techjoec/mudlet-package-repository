@@ -1,7 +1,5 @@
 import zipfile
 import re
-import csv
-import random
 from pathlib import Path
 
 PATTERNS = {
@@ -20,8 +18,8 @@ PATTERNS = {
     ],
     # literal addresses or URLs embedded in code
     'Network Identifiers': [
-        (r'(?:https?|ftp)://[^\s"\']+', ''),
-        (r'\b(?:\d{1,3}\.){3}\d{1,3}\b', ''),
+        (r'((?:https?|ftp)://[^\s"\']+)', ''),
+        (r'((?:\d{1,3}\.){3}\d{1,3})', ''),
     ],
     # running code from strings or files
     'Unsafe Inputs': [
@@ -36,7 +34,6 @@ PATTERNS = {
 IGNORED_PACKAGES = {"MudletBusted.mpackage"}
 
 CONTEXT_LINES = 2
-MAX_MATCHES = 100
 
 
 def remove_comments(text: str) -> str:
@@ -90,7 +87,7 @@ def strip_description_blocks(text: str) -> str:
     return '\n'.join(output)
 
 
-def find_matches(text, regexes, remaining):
+def find_matches(text, regexes):
     matches = []
     text = remove_comments(text)
     text = strip_description_blocks(text)
@@ -106,13 +103,12 @@ def find_matches(text, regexes, remaining):
                     start = max(0, idx - CONTEXT_LINES - 1)
                     end = min(len(lines), idx + CONTEXT_LINES)
                     context = '\n'.join(lines[start:end])
-                    matches.append((idx, context, line.strip(), m.group(0), category))
-                    if len(matches) >= remaining:
-                        return matches
+                    address = m.group(1) if category == 'Network Identifiers' else ''
+                    matches.append((idx, context, line.strip(), m.group(0), category, address))
     return matches
 
 
-def scan_package(path, remaining):
+def scan_package(path):
     results = []
     try:
         with zipfile.ZipFile(path) as z:
@@ -121,8 +117,8 @@ def scan_package(path, remaining):
                     continue
                 with z.open(member) as f:
                     text = f.read().decode('utf-8', errors='ignore')
-                matches = find_matches(text, PATTERNS, remaining - len(results))
-                for idx, context, line, match, category in matches:
+                matches = find_matches(text, PATTERNS)
+                for idx, context, line, match, category, address in matches:
                     results.append({
                         'package': path.name,
                         'file': member,
@@ -130,9 +126,8 @@ def scan_package(path, remaining):
                         'context': context,
                         'matched': match,
                         'category': category,
+                        'address': address,
                     })
-                    if len(results) >= remaining:
-                        return results
     except zipfile.BadZipFile:
         pass
     return results
@@ -152,7 +147,7 @@ def write_html(results, path='scan_report.html'):
             return
 
         f.write('<table>')
-        headers = ['Package', 'File', 'Line', 'Category', 'Match', 'Context']
+        headers = ['Package', 'File', 'Line', 'Category', 'Match', 'Address', 'Context']
         f.write('<tr>' + ''.join(f'<th>{h}</th>' for h in headers) + '</tr>')
         for row in results:
             context = (row['context']
@@ -166,6 +161,7 @@ def write_html(results, path='scan_report.html'):
                     f'<td>{row["line_number"]}</td>'
                     f'<td>{row["category"]}</td>'
                     f'<td>{row["matched"]}</td>'
+                    f'<td>{row.get("address", "")}</td>'
                     f'<td>{context}</td>'
                     '</tr>')
         f.write('</table></body></html>')
@@ -175,21 +171,9 @@ def main():
     pkg_dir = Path('packages')
     package_files = [p for p in pkg_dir.glob('*.mpackage')] + list(pkg_dir.glob('*.zip'))
     package_files = [p for p in package_files if p.name not in IGNORED_PACKAGES]
-    random.shuffle(package_files)
     results = []
     for pkg in package_files:
-        remaining = MAX_MATCHES - len(results)
-        if remaining <= 0:
-            break
-        results.extend(scan_package(pkg, remaining))
-        if len(results) >= MAX_MATCHES:
-            break
-
-    with open('scan_report.csv', 'w', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=['package', 'file', 'line_number', 'category', 'matched', 'context'])
-        writer.writeheader()
-        for row in results:
-            writer.writerow(row)
+        results.extend(scan_package(pkg))
 
     write_html(results)
 
