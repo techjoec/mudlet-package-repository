@@ -10,3 +10,4 @@
 - Detection logic skips lines that define functions such as `openUrl = function(...)` to avoid false positives.
 - Network detection now matches `require('socket.http')`, `socket.http.request` and similar calls rather than any URL string.
 - Literal URLs and IP addresses are flagged unless they appear in package `description` blocks.
+- FQDNs are checked via DNS lookups; unresolved domains are flagged as `Unregistered` and domains on known public hosting providers are marked as `Publicly Writable`.
