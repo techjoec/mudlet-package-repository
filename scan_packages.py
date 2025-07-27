@@ -5,17 +5,66 @@ import random
 from pathlib import Path
 
 PATTERNS = {
-    'Process Spawning': [r'\bos\.execute\b', r'\bio\.popen\b', r'\bspawn\b'],
-    'External Communications': [r'socket\.http', r'https?://'],
-    'Unsafe Inputs': [r'\bloadstring\b', r'\bdofile\b', r'\bloadfile\b'],
+    # explicit function calls that could execute external processes
+    'Process Spawning': [
+        r'\bos\.execute\s*\(',
+        r'\bio\.popen\s*\(',
+        r'\bspawn\s*\('
+    ],
+    # network activity via LuaSocket or Mudlet helpers
+    'External Communications': [
+        r'socket\.http',
+        r'https?://',
+        r'\bopenUrl\s*\(',
+        r'\bdownloadFile\s*\('
+    ],
+    # running code from strings or files
+    'Unsafe Inputs': [
+        r'\bloadstring\s*\(',
+        r'\bdofile\s*\(',
+        r'\bloadfile\s*\('
+    ],
 }
 
 CONTEXT_LINES = 2
 MAX_MATCHES = 10
 
 
+def remove_comments(text: str) -> str:
+    """Strip Lua single-line and block comments."""
+    lines = text.splitlines()
+    result = []
+    in_block = False
+    for line in lines:
+        i = 0
+        out = ''
+        while i < len(line):
+            if not in_block and line.startswith('--[[', i):
+                in_block = True
+                i += 4
+                continue
+            if in_block:
+                end = line.find(']]', i)
+                if end == -1:
+                    i = len(line)
+                    continue
+                i = end + 2
+                in_block = False
+                continue
+            if line.startswith('--', i):
+                break
+            out += line[i]
+            i += 1
+        if not in_block:
+            result.append(out)
+        else:
+            result.append(out)
+    return '\n'.join(result)
+
+
 def find_matches(text, regexes, remaining):
     matches = []
+    text = remove_comments(text)
     lines = text.splitlines()
     for idx, line in enumerate(lines, 1):
         for category, regs in regexes.items():

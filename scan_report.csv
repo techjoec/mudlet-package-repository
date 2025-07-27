@@ -1,50 +1,49 @@
 package,file,line_number,category,matched,context
-figinator.mpackage,config.lua,8,External Communications,http://,"## Create ascii art out of text
+bfind-scroll-buffer-find.mpackage,config.lua,9,External Communications,https://,"
 
-The figinator is a Mudlet package designed to put the awesome power of [Figlets](http://figlet.org) right at your finger tips.
+This package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1515&sid=84928af0d42b4e223b12fcba497301e9) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!]]"
+MudletBusted.mpackage,busted/modules/cli.lua,186,Unsafe Inputs,loadfile(,"    end
+    if bustedConfigFilePath then
+      local bustedConfigFile, err = loadfile(bustedConfigFilePath)
+      if not bustedConfigFile then
+        return nil, (""failed loading config file `%s`: %s""):format(bustedConfigFilePath, err)"
+MudletBusted.mpackage,busted/modules/files/lua.lua,16,Unsafe Inputs,loadfile(,"
+ret.load = function(busted, filename)
+  local file, err = loadfile(filename)
+  if not file then
+    busted.publish({ 'error', 'file' }, { descriptor = 'file', name = filename }, nil, err, {})"
+MudletBusted.mpackage,busted/modules/files/moonscript.lua,100,Unsafe Inputs,loadfile(,"
+ret.load = function(busted, filename)
+  local file, err = moonscript.loadfile(filename)
+  if not file then
+    busted.publish({ 'error', 'file' }, { descriptor = 'file', name = filename }, nil, err, {})"
+MudletBusted.mpackage,busted/modules/files/terra.lua,17,Unsafe Inputs,loadfile(,"
+ret.load = function(busted, filename)
+  local file, err = terralib.loadfile(filename)
+  if not file then
+    busted.publish({ 'error', 'file' }, { descriptor = 'file', name = filename }, nil, err, {})"
+MudletBusted.mpackage,busted/modules/helper_loader.lua,12,Unsafe Inputs,dofile(,"      _G.arg = options.arguments
+      if helper:match('%.lua$') then
+        dofile(path.normpath(helper))
+      elseif hasMoon and helper:match('%.moon$') then
+        moonscript.dofile(path.normpath(helper))"
+MudletBusted.mpackage,busted/modules/helper_loader.lua,14,Unsafe Inputs,dofile(,"        dofile(path.normpath(helper))
+      elseif hasMoon and helper:match('%.moon$') then
+        moonscript.dofile(path.normpath(helper))
+      else
+        require(helper)"
+MudletBusted.mpackage,busted/modules/output_handler_loader.lua,12,Unsafe Inputs,dofile(,"    local success, err = pcall(function()
+      if output:match('%.lua$') then
+        handler = dofile(path.normpath(output))
+      elseif hasMoon and output:match('%.moon$') then
+        handler = moonscript.dofile(path.normpath(output))"
+MudletBusted.mpackage,busted/modules/output_handler_loader.lua,14,Unsafe Inputs,dofile(,"        handler = dofile(path.normpath(output))
+      elseif hasMoon and output:match('%.moon$') then
+        handler = moonscript.dofile(path.normpath(output))
+      else
+        handler = require('busted.outputHandlers.' .. output)"
+MudletBusted.mpackage,busted/outputHandlers/sound.lua,31,Process Spawning,io.popen(,"    end
 
-Examples of all the included fonts can be font on [the Wiki](https://github.com/demonnic/figinator/wiki)"
-figinator.mpackage,config.lua,10,External Communications,https://,"The figinator is a Mudlet package designed to put the awesome power of [Figlets](http://figlet.org) right at your finger tips.
+    io.popen(sayer_pre .. '""' .. messages[math.random(1, #messages)] .. '""' .. sayer_post)
 
-Examples of all the included fonts can be font on [the Wiki](https://github.com/demonnic/figinator/wiki)
-
-## Installation"
-figinator.mpackage,config.lua,16,External Communications,https://,"The fastest way to install the figinator is to run the following alias:
-
-`lua uninstallPackage(""figinator"") installPackage(""https://github.com/demonnic/figinator/releases/latest/download/figinator.mpackage"")`
-
-After that you can stay up to date using the `fig update` alias. (Available in 1.2+)"
-figinator.mpackage,config.lua,95,External Communications,https://,"## Credit and acclaim
-
-The figlet lua implementation is primarily the work of Nick Gammon and was taken from [his forum](https://www.gammon.com.au/forum/?id=10748&reply=6#reply6) then modified to be a lua module. And I added some convenience methods for getting strings directly instead of a table of lines.
-
-Then I took that and wrapped it in this package which includes several fonts pulled from [this git repo](https://github.com/xero/figlet-fonts) and some convenience methods for switching between the included ones easily."
-figinator.mpackage,config.lua,97,External Communications,https://,"The figlet lua implementation is primarily the work of Nick Gammon and was taken from [his forum](https://www.gammon.com.au/forum/?id=10748&reply=6#reply6) then modified to be a lua module. And I added some convenience methods for getting strings directly instead of a table of lines.
-
-Then I took that and wrapped it in this package which includes several fonts pulled from [this git repo](https://github.com/xero/figlet-fonts) and some convenience methods for switching between the included ones easily.
-
-In short, all the coolest parts of what this does are things other people made, I'm just trying to make them easy for Mudlet users to use =)"
-figinator.mpackage,gradientmaker.lua,2,External Communications,https://,"--- Module which provides for creating color gradients for your text.
--- Original functions found on <a href=""https://forums.lusternia.com/discussion/3261/anyone-want-text-gradients"">the Lusternia Forums</a>
--- <br> I added functions to work with hecho.
--- <br> I also made performance enhancements by storing already calculated gradients after first use for the session and only including the colorcode in the returned string if the color changed."
-figinator.mpackage,gradientmaker.lua,232,External Communications,https://,"
---- Returns the text, with the defined color gradients applied and formatted for us with decho. Usage example below produces the following text
--- <br><img src=""https://demonnic.github.io/mdk/images/dechogradient.png"" alt=""dgradient example"">
--- @tparam string text The text you want to apply the color gradients to
--- @param first_color The color you want it to start at. Table of colors in { r, g, b } format"
-figinator.mpackage,gradientmaker.lua,248,External Communications,https://,"
---- Returns the text, with the defined color gradients applied and formatted for us with cecho. Usage example below produces the following text
--- <br><img src=""https://demonnic.github.io/mdk/images/cechogradient.png"" alt=""cgradient example"">
--- @tparam string text The text you want to apply the color gradients to
--- @param first_color The color you want it to start at. Table of colors in { r, g, b } format"
-figinator.mpackage,gradientmaker.lua,264,External Communications,https://,"
---- Returns the text, with the defined color gradients applied and formatted for us with hecho. Usage example below produces the following text
--- <br><img src=""https://demonnic.github.io/mdk/images/hechogradient.png"" alt=""hgradient example"">
--- @tparam string text The text you want to apply the color gradients to
--- @param first_color The color you want it to start at. Table of colors in { r, g, b } format"
-mpkg.mpackage,config.lua,21,External Communications,https://,"### See Also
-
-* https://packages.mudlet.org
-]]
-version = [[3.3]]"
+    return nil, true"
