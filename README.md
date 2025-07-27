@@ -40,6 +40,22 @@ Contribute your mpackage using Github's "[fork and pull request](https://docs.gi
 
 Using Docker, run `./mpkg/muddle` or run Muddler [manually](https://github.com/demonnic/muddler/wiki/Installation) to generate the new `./mpkg/build/mpkg.mpackage` file can be loaded into Mudlet as a module.
 
+### Running Scans ###
+
+Install the Python dependencies before executing `scan_packages.py` or
+`scripts/security_scan.py`:
+
+```bash
+pip install -r requirements.txt
+```
+
+Then run either script as needed:
+
+```bash
+python scan_packages.py
+python scripts/security_scan.py
+```
+
 ### New `mpkg` release
 
 To make a new mpkg release, bump the version in [mpkg/mfile](mpkg/mfile) and the rest will happen automatically.
