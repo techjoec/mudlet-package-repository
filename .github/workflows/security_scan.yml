@@ -1,0 +1,66 @@
+name: Security Scan
+
+on:
+  push:
+    paths:
+      - 'packages/**'
+  pull_request:
+    paths:
+      - 'packages/**'
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Run security scan
+        id: scan
+        run: |
+          python scripts/security_scan.py | tee scan.log
+        continue-on-error: true
+      - name: Upload scan log
+        uses: actions/upload-artifact@v3
+        with:
+          name: scan-log
+          path: scan.log
+      - name: Label PR if suspicious
+        if: steps.scan.outcome == 'failure'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const labelName = 'pending-investigation';
+            async function ensureLabel() {
+              try {
+                await github.rest.issues.getLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: labelName
+                });
+              } catch (e) {
+                if (e.status === 404) {
+                  await github.rest.issues.createLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    name: labelName,
+                    color: 'ff0000',
+                    description: 'Package flagged for investigation'
+                  });
+                } else {
+                  throw e;
+                }
+              }
+            }
+            if (context.eventName === 'pull_request') {
+              await ensureLabel();
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: [labelName]
+              });
+            }
