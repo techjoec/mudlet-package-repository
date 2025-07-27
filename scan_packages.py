@@ -26,8 +26,11 @@ PATTERNS = {
     ],
 }
 
+# packages that should be ignored during scanning
+IGNORED_PACKAGES = {"MudletBusted.mpackage"}
+
 CONTEXT_LINES = 2
-MAX_MATCHES = 10
+MAX_MATCHES = 100
 
 
 def remove_comments(text: str) -> str:
@@ -141,7 +144,8 @@ def write_html(results, path='scan_report.html'):
 
 def main():
     pkg_dir = Path('packages')
-    package_files = list(pkg_dir.glob('*.mpackage')) + list(pkg_dir.glob('*.zip'))
+    package_files = [p for p in pkg_dir.glob('*.mpackage')] + list(pkg_dir.glob('*.zip'))
+    package_files = [p for p in package_files if p.name not in IGNORED_PACKAGES]
     random.shuffle(package_files)
     results = []
     for pkg in package_files:
