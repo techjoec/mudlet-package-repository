@@ -7,27 +7,50 @@ import time
 import argparse
 
 SUSPICIOUS_PATTERNS = [
-    r"http://",
-    r"https://",
-    r"spawn\s*\(",
-    r"os\.execute\s*\(",
-    r"irc",
-    r"telnet",
-    r"io\.open\s*\(",
-    r"socket\.tcp",
-    r"socket\.connect",
-    r"socket\.http",
-    r"http\.request",
+    (r"http://", None),
+    (r"https://", None),
+    (r"spawn\s*\(", None),
+    (r"os\.execute\s*\(", None),
+    (r"irc", None),
+    (r"telnet", None),
+    (r"io\.open\s*\(", None),
+    (r"socket\.tcp", None),
+    (r"socket\.connect", None),
+    (r"socket\.http", None),
+    (r"http\.request", None),
+    (r"openUrl\s*\(", "openUrl"),
+    (r"downloadFile\s*\(", "downloadFile"),
+    (r"getHTTP\s*\(", "getHTTP"),
+    (r"postHTTP\s*\(", "postHTTP"),
+    (r"putHTTP\s*\(", "putHTTP"),
+    (r"deleteHTTP\s*\(", "deleteHTTP"),
+    (r"customHTTP\s*\(", "customHTTP"),
+    (r"installPackage\s*\(", "installPackage"),
+    (r"uninstallPackage\s*\(", "uninstallPackage"),
+    (r"unzipAsync\s*\(", "unzipAsync"),
+    (r"openWebPage\s*\(", "openWebPage"),
 ]
 
 ALLOWED_EXTS = (".mpackage", ".zip", ".lua", ".xml", ".txt", ".json", ".md")
 
 
+def _is_function_definition(line: str, token: str) -> bool:
+    """Return True if the line defines the given function."""
+    return (
+        re.search(rf'(?:^|\s)(?:local\s+)?function\s+{re.escape(token)}\b', line)
+        or re.search(rf'{re.escape(token)}\s*=\s*function\b', line)
+    )
+
+
 def scan_content(content):
     found = []
-    for pattern in SUSPICIOUS_PATTERNS:
-        if re.search(pattern, content, re.IGNORECASE):
-            found.append(pattern)
+    lines = content.splitlines()
+    for line in lines:
+        for pattern, token in SUSPICIOUS_PATTERNS:
+            if re.search(pattern, line, re.IGNORECASE):
+                if token and _is_function_definition(line, token):
+                    continue
+                found.append(pattern)
     return found
 
 
