@@ -45,7 +45,7 @@ export async function POST(request: Request) {
   }
 
   // Read and parse existing packages
-  const packagesJson = await fetch('https://raw.githubusercontent.com/Mudlet/mudlet-package-repository/refs/heads/main/packages/mpkg.packages.json')
+  const packagesJson = await fetch('https://raw.githubusercontent.com/Mudlet/mudlet-package-repository/refs/heads/checker/packages/mpkg.packages.json')
   const packagesData = await packagesJson.json() as PackagesJson
 
   // Find existing package by name and author
@@ -67,8 +67,8 @@ export async function POST(request: Request) {
   console.log('File content length:', fileContent.length)
   
   try {
-    console.log('Creating new branch from main...')
-    await createBranch(branchName, 'main')
+    console.log('Creating new branch from checker...')
+    await createBranch(branchName, 'checker')
     console.log('Branch created successfully')
     
     // If found, delete the old package version

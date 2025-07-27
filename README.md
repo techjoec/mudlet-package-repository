@@ -7,7 +7,7 @@ This Github repository hosts packages made for the Mudlet MUD client.  It is als
 mpkg comes preinstalled on later (4.20+) versions of Mudlet.  If you do not have it, consider upgrading or
 issue this command on any profile you wish to use mpkg with.
 
-```lua installPackage("https://github.com/Mudlet/mudlet-package-repository/raw/refs/heads/main/packages/mpkg.mpackage")```
+```lua installPackage("https://github.com/Mudlet/mudlet-package-repository/raw/refs/heads/checker/packages/mpkg.mpackage")```
 
 Then on the command line you can issue any of the following commands.
 
