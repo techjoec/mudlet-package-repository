@@ -1,6 +1,7 @@
 import zipfile
 import re
 from pathlib import Path
+import csv
 
 PATTERNS = {
     # explicit function calls that could execute external processes
@@ -103,8 +104,20 @@ def find_matches(text, regexes):
                     start = max(0, idx - CONTEXT_LINES - 1)
                     end = min(len(lines), idx + CONTEXT_LINES)
                     context = '\n'.join(lines[start:end])
-                    address = m.group(1) if category == 'Network Identifiers' else ''
-                    matches.append((idx, context, line.strip(), m.group(0), category, address))
+                    address = ''
+                    uri = ''
+                    domain = ''
+                    if category == 'Network Identifiers':
+                        addr = m.group(1)
+                        if re.match(r'^(?:https?|ftp)://', addr):
+                            uri = addr
+                            domain = re.sub(r'^(?:https?|ftp)://', '', addr)
+                            domain = domain.split('/')[0]
+                            address = domain
+                        else:
+                            domain = addr
+                            address = addr
+                    matches.append((idx, context, line.strip(), m.group(0), category, address, domain, uri))
     return matches
 
 
@@ -118,7 +131,7 @@ def scan_package(path):
                 with z.open(member) as f:
                     text = f.read().decode('utf-8', errors='ignore')
                 matches = find_matches(text, PATTERNS)
-                for idx, context, line, match, category, address in matches:
+                for idx, context, line, match, category, address, domain, uri in matches:
                     results.append({
                         'package': path.name,
                         'file': member,
@@ -127,6 +140,8 @@ def scan_package(path):
                         'matched': match,
                         'category': category,
                         'address': address,
+                        'domain': domain,
+                        'uri': uri,
                     })
     except zipfile.BadZipFile:
         pass
@@ -147,7 +162,7 @@ def write_html(results, path='scan_report.html'):
             return
 
         f.write('<table>')
-        headers = ['Package', 'File', 'Line', 'Category', 'Match', 'Address', 'Context']
+        headers = ['Package', 'File', 'Line', 'Category', 'Match', 'Address', 'Domain/IP', 'URI', 'Context']
         f.write('<tr>' + ''.join(f'<th>{h}</th>' for h in headers) + '</tr>')
         for row in results:
             context = (row['context']
@@ -162,9 +177,31 @@ def write_html(results, path='scan_report.html'):
                     f'<td>{row["category"]}</td>'
                     f'<td>{row["matched"]}</td>'
                     f'<td>{row.get("address", "")}</td>'
+                    f'<td>{row.get("domain", "")}</td>'
+                    f'<td>{row.get("uri", "")}</td>'
                     f'<td>{context}</td>'
                     '</tr>')
         f.write('</table></body></html>')
+
+
+def write_csv(results, path='scan_report.csv'):
+    """Write a CSV report with simple headers."""
+    headers = ['Package', 'File', 'Line', 'Category', 'Match', 'Address', 'Domain/IP', 'URI', 'Context']
+    with open(path, 'w', encoding='utf-8', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(headers)
+        for row in results:
+            writer.writerow([
+                row['package'],
+                row['file'],
+                row['line_number'],
+                row['category'],
+                row['matched'],
+                row.get('address', ''),
+                row.get('domain', ''),
+                row.get('uri', ''),
+                row['context'].replace('\n', '\\n')
+            ])
 
 
 def main():
@@ -176,6 +213,7 @@ def main():
         results.extend(scan_package(pkg))
 
     write_html(results)
+    write_csv(results)
 
 
 if __name__ == '__main__':
