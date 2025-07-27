@@ -18,6 +18,11 @@ PATTERNS = {
         (r'\bopenUrl\s*\(', 'openUrl'),
         (r'\bdownloadFile\s*\(', 'downloadFile'),
     ],
+    # literal addresses or URLs embedded in code
+    'Network Identifiers': [
+        (r'(?:https?|ftp)://[^\s"\']+', ''),
+        (r'\b(?:\d{1,3}\.){3}\d{1,3}\b', ''),
+    ],
     # running code from strings or files
     'Unsafe Inputs': [
         (r'\bloadstring\s*\(', 'loadstring'),
@@ -66,17 +71,37 @@ def remove_comments(text: str) -> str:
     return '\n'.join(result)
 
 
+def strip_description_blocks(text: str) -> str:
+    """Remove multiline description strings used for documentation."""
+    lines = text.splitlines()
+    output = []
+    in_desc = False
+    for line in lines:
+        if not in_desc and re.search(r'^\s*description\s*=\s*\[\[', line):
+            in_desc = True
+            if ']]' in line:
+                in_desc = False
+            continue
+        if in_desc:
+            if ']]' in line:
+                in_desc = False
+            continue
+        output.append(line)
+    return '\n'.join(output)
+
+
 def find_matches(text, regexes, remaining):
     matches = []
     text = remove_comments(text)
+    text = strip_description_blocks(text)
     lines = text.splitlines()
     for idx, line in enumerate(lines, 1):
         for category, regs in regexes.items():
             for reg, token in regs:
                 m = re.search(reg, line)
                 if m:
-                    if re.search(rf'(?:^|\s)(?:local\s+)?function\s+{re.escape(token)}\b', line) or \
-                       re.search(rf'{re.escape(token)}\s*=\s*function\b', line):
+                    if token and (re.search(rf'(?:^|\s)(?:local\s+)?function\s+{re.escape(token)}\b', line) or \
+                                 re.search(rf'{re.escape(token)}\s*=\s*function\b', line)):
                         continue
                     start = max(0, idx - CONTEXT_LINES - 1)
                     end = min(len(lines), idx + CONTEXT_LINES)

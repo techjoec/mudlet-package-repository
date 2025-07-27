@@ -1,134 +1,9 @@
 package,file,line_number,category,matched,context
-MedUI.mpackage,demontools.lua,98,Unsafe Inputs,loadstring(,"
-local function getValueAt(accessString)
-  local ok, err = pcall(loadstring(""return "" .. tostring(accessString)))
-  if ok then return err end
-  return nil, err"
-MedUI.mpackage,emco.lua,2229,Unsafe Inputs,load(,"  
-  
-  function EMCO:load()
-    local dirname = getMudletHomeDir() .. ""/EMCO/""
-    local filename = dirname .. self.name .. "".lua"""
-MedUI.mpackage,emco.lua,2234,Unsafe Inputs,load(,"    local configTable = {}
-    if io.exists(filename) then
-      table.load(filename, configTable)
-    else
-      debugc(string.format(""Attempted to load config for EMCO named %s but the file could not be found. Filename: %s"", self.name, filename))"
-AchaeaChatTabs.mpackage,emco.lua,2229,Unsafe Inputs,load(,"
-
-function EMCO:load()
-  local dirname = getMudletHomeDir() .. ""/EMCO/""
-  local filename = dirname .. self.name .. "".lua"""
-AchaeaChatTabs.mpackage,emco.lua,2234,Unsafe Inputs,load(,"  local configTable = {}
-  if io.exists(filename) then
-    table.load(filename, configTable)
-  else
-    debugc(string.format(""Attempted to load config for EMCO named %s but the file could not be found. Filename: %s"", self.name, filename))"
-MDK.mpackage,demontools.lua,98,Unsafe Inputs,loadstring(,"
-local function getValueAt(accessString)
-  local ok, err = pcall(loadstring(""return "" .. tostring(accessString)))
-  if ok then return err end
-  return nil, err"
-MDK.mpackage,echofile.lua,15,Unsafe Inputs,loadstring(,"if _VERSION == ""Lua 5.1"" then
-  load = function(code, name, _, env)
-    local fn, err = loadstring(code, name)
-    if fn then
-      setfenv(fn, env)"
-MDK.mpackage,echofile.lua,46,Unsafe Inputs,load(,"      end,
-    })
-    local fn, err = load(""return "" .. code, ""expression `"" .. code .. ""`"", ""t"", exp_env)
-    if fn then
-      return tostring(fn())"
-MDK.mpackage,emco.lua,2229,Unsafe Inputs,load(,"
-
-function EMCO:load()
-  local dirname = getMudletHomeDir() .. ""/EMCO/""
-  local filename = dirname .. self.name .. "".lua"""
-MDK.mpackage,emco.lua,2234,Unsafe Inputs,load(,"  local configTable = {}
-  if io.exists(filename) then
-    table.load(filename, configTable)
-  else
-    debugc(string.format(""Attempted to load config for EMCO named %s but the file could not be found. Filename: %s"", self.name, filename))"
-MDK.mpackage,loginator.lua,410,External Communications,openUrl(,"
-function Loginator:open()
-  openUrl(self:getFullFilename())
-end
-"
-MDK.mpackage,loginator.lua,415,External Communications,openUrl(,"
-function Loginator:openDir()
-  openUrl(self:getPath())
-end
-"
-MDK.mpackage,spinbox.lua,309,External Communications,downloadFile(,"    end
-    if upURL:match(""^http"") then
-      self:downloadFile(upURL, upFile)
-    elseif io.exists(upURL) then
-      upFile = upURL"
-MDK.mpackage,spinbox.lua,323,External Communications,downloadFile(,"    end
-    if downURL:match(""^http"") then
-      self:downloadFile(downURL, downFile)
-    elseif io.exists(downURL) then
-      downFile = downURL"
-MDK.mpackage,spinbox.lua,346,External Communications,downloadFile(,"
-
-function spinbox:downloadFile(url, fileName)
-  local parts = fileName:split(""/"")
-  parts[#parts] = nil"
-MDK.mpackage,spinbox.lua,371,External Communications,downloadFile(,"  registerNamedEventHandler(uname, handlerName .. ""done"", ""sysDownloadDone"", handler, true)
-  registerNamedEventHandler(uname, handlerName .. ""error"", ""sysDownloadError"", handler, true)
-  downloadFile(fileName, url)
-end
-"
-MDK.mpackage,spinbox.lua,379,Unsafe Inputs,load(,"  local locations = {}
-  if io.exists(saveFile) then
-    table.load(saveFile, locations)
-  end
-  return locations"
-MDK.mpackage,sug.lua,20,Unsafe Inputs,loadstring(,"
-local function getValueAt(accessString)
-  local ok, err = pcall(loadstring(""return "" .. tostring(accessString)))
-  if ok then return err end
-  return nil, err"
-MDK.mpackage,timergauge.lua,236,Unsafe Inputs,loadstring(,"  local hooktype = type(hook)
-  if hooktype == ""string"" then
-    local f, e = loadstring(""return "" .. hook)
-    if not f then
-      f, e = loadstring(hook)"
-MDK.mpackage,timergauge.lua,238,Unsafe Inputs,loadstring(,"    local f, e = loadstring(""return "" .. hook)
-    if not f then
-      f, e = loadstring(hook)
-    end
-    if not f then"
-i18n-support-for-mudlet-scripts.mpackage,config.lua,6,Unsafe Inputs,load(,"author = [[demonnic]]
-mpackage = [[i18n-support-for-mudlet-scripts]]
-description = [[i18n.lua is a Lua internationalization library that allows developers to easily manage and switch between multiple language translations for their applications. The package enables users to load translation tables for different locales and dynamically change the active language using simple functions like i18n.load() and i18n.setLocale(). With this library, developers can quickly implement multilingual support by defining translation strings and retrieving localized text with the i18n() function.
-
-"
-i18n-support-for-mudlet-scripts.mpackage,i18n/init.lua,174,Unsafe Inputs,load(,"end
-
-function i18n.load(data)
-  recursiveLoad(nil, data)
-end"
-i18n-support-for-mudlet-scripts.mpackage,i18n/init.lua,179,Unsafe Inputs,loadfile(,"
-function i18n.loadFile(path)
-  local chunk = assert(loadfile(path))
-  local data = chunk()
-  i18n.load(data)"
-i18n-support-for-mudlet-scripts.mpackage,i18n/init.lua,181,Unsafe Inputs,load(,"  local chunk = assert(loadfile(path))
-  local data = chunk()
-  i18n.load(data)
-end
-"
-EMCOChat.mpackage,emco.lua,2229,Unsafe Inputs,load(,"
-
-function EMCO:load()
-  local dirname = getMudletHomeDir() .. ""/EMCO/""
-  local filename = dirname .. self.name .. "".lua"""
-EMCOChat.mpackage,emco.lua,2234,Unsafe Inputs,load(,"  local configTable = {}
-  if io.exists(filename) then
-    table.load(filename, configTable)
-  else
-    debugc(string.format(""Attempted to load config for EMCO named %s but the file could not be found. Filename: %s"", self.name, filename))"
+copyToAda.mpackage,config.lua,3,Network Identifiers,https://ada-young.com/pastebin/,"mpackage = [[copyToAda]]
+author = [[Demonnic]]
+title = [[Copy selected text as HTML to https://ada-young.com/pastebin/ using https://ada-young.com/pastebin/api/v1/about ]]
+version = [[1.0.0]]
+created = [[2024-12-28T04:18:51+0000]]"
 Achaean System.mpackage,curing/remedies.lua,585,Unsafe Inputs,dofile(,"
     
     dofile(getMudletHomeDir() .. ""/Achaean System/curing/remedies.lua"")
@@ -144,21 +19,62 @@ function reloadHuntingFile()
   dofile(getMudletHomeDir() .. ""/Achaean System/hunting/hunting.lua"")  
   echo(""\nHunting Loaded"")
 end"
+Achaean System.mpackage,system/libs/deps/dkjson.lua,14,Network Identifiers,http://dkolf.de/dkjson-lua/>.,"
+For the documentation see the corresponding readme.txt or visit
+<http://dkolf.de/dkjson-lua/>.
+
+You can contact the author by sending an e-mail to 'david' at the"
 Achaean System.mpackage,system/libs/deps/preferences.lua,133,Unsafe Inputs,load(,"  
   
   function preferences.load(pkg, file, defaults) end
 
   "
+Achaean System.mpackage,system/libs/deps/version.lua,1,Network Identifiers,2.00.00.05,return '2.00.00.05-pre-master'
+Achaean System.mpackage,system/libs/luarocks/admin/index.lua,64,Network Identifiers,http://www.luarocks.org,"<h1>Available rocks</h1>
+<p>
+Lua modules available from this location for use with <a href=""http://www.luarocks.org"">LuaRocks</a>:
+</p>
+<table class=""main"">"
+Achaean System.mpackage,system/libs/luarocks/cmd.lua,175,Network Identifiers,https://github.com/luarocks/luarocks/issues).\n,"   end
+   return debug.traceback(""LuaRocks ""..cfg.program_version..
+      "" bug (please report at https://github.com/luarocks/luarocks/issues).\n""..
+      mode..""\n""..err, 2)
+end"
 Achaean System.mpackage,system/libs/luarocks/cmd.lua,254,Unsafe Inputs,loadfile(,"         for _, d in ipairs(dirs) do
             local f = dir.path(d, ""default-lua-version.lua"")
             local mod, err = loadfile(f, ""t"")
             if mod then
                local pok, ver = pcall(mod)"
+Achaean System.mpackage,system/libs/luarocks/cmd/config.lua,50,Network Identifiers,https://github.com/luarocks/luarocks/wiki/Config-file-format,"
+  Example: luarocks config]], util.see_also([[
+   https://github.com/luarocks/luarocks/wiki/Config-file-format
+   for detailed information on the LuaRocks config file format.
+]]))"
 Achaean System.mpackage,system/libs/luarocks/cmd/write_rockspec.lua,124,Process Spawning,io.popen(,"   local function detect_url_from_command(program, args, directory)
       local command = fs.Q(cfg.variables[program:upper()]).. "" ""..args
       local pipe = io.popen(fs.command_at(directory, fs.quiet_stderr(command)))
       if not pipe then return nil end
       local url = pipe:read(""*a""):match(""^([^\r\n]+)"")"
+Achaean System.mpackage,system/libs/luarocks/core/cfg.lua,205,Network Identifiers,https://luarocks.org,"      rocks_servers = {
+         {
+           ""https://luarocks.org"",
+           ""https://raw.githubusercontent.com/rocks-moonscript-org/moonrocks-mirror/master/"",
+           ""https://loadk.com/luarocks/"","
+Achaean System.mpackage,system/libs/luarocks/core/cfg.lua,206,Network Identifiers,https://raw.githubusercontent.com/rocks-moonscript-org/moonrocks-mirror/master/,"         {
+           ""https://luarocks.org"",
+           ""https://raw.githubusercontent.com/rocks-moonscript-org/moonrocks-mirror/master/"",
+           ""https://loadk.com/luarocks/"",
+         }"
+Achaean System.mpackage,system/libs/luarocks/core/cfg.lua,207,Network Identifiers,https://loadk.com/luarocks/,"           ""https://luarocks.org"",
+           ""https://raw.githubusercontent.com/rocks-moonscript-org/moonrocks-mirror/master/"",
+           ""https://loadk.com/luarocks/"",
+         }
+      },"
+Achaean System.mpackage,system/libs/luarocks/core/cfg.lua,213,Network Identifiers,https://luarocks.org,"
+      upload = {
+         server = ""https://luarocks.org"",
+         tool_version = ""1.0.0"",
+         api_version = ""1"","
 Achaean System.mpackage,system/libs/luarocks/core/cfg.lua,444,Process Spawning,io.popen(,"         
          
          local pipe = io.popen(""cygpath 
@@ -264,11 +180,51 @@ Achaean System.mpackage,system/libs/luarocks/fs/win32/tools.lua,224,Process Spaw
    local fd = assert(io.popen(""wmic UserAccount get name""))
    for user in fd:lines() do
       user = user:gsub(""%s+$"", """")"
+Achaean System.mpackage,system/libs/luarocks/vendor/dkjson.lua,14,Network Identifiers,http://dkolf.de/src/dkjson-lua.fsl/>.,"
+For the documentation see the corresponding readme.txt or visit
+<http://dkolf.de/src/dkjson-lua.fsl/>.
+
+You can contact the author by sending an e-mail to 'david' at the"
 Achaean System.mpackage,system/system.lua,200,Unsafe Inputs,dofile(,"function reloadSystem()
   
   dofile(getMudletHomeDir() .. ""/Achaean System/system/system.lua"")
   cecho(""\n<green>Configuration File Loaded.\n"")
 end"
+AchaeaChatTabs.mpackage,demontools.lua,61,Network Identifiers,http://www.w3.org/TR/html4/loose.dtd,"
+local htmlHeader = [=[  <!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.01 Transitional//EN""
+""http://www.w3.org/TR/html4/loose.dtd"">
+<html>
+  <head>"
+AchaeaChatTabs.mpackage,demontools.lua,65,Network Identifiers,http://fonts.googleapis.com/css?family=Droid+Sans+Mono,"  <head>
+    <meta http-equiv=""Content-Type"" content=""text/html;charset=utf-8"" >
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <style type=""text/css"">
+      body {"
+AchaeaChatTabs.mpackage,demontools.lua,79,Network Identifiers,http://www.w3.org/TR/html4/loose.dtd,"
+local htmlHeaderPattern = [=[  <!DOCTYPE HTML PUBLIC ""%-//W3C//DTD HTML 4.01 Transitional//EN""
+""http://www.w3.org/TR/html4/loose.dtd"">
+<html>
+  <head>"
+AchaeaChatTabs.mpackage,demontools.lua,83,Network Identifiers,http://fonts.googleapis.com/css%?family=Droid%+Sans%+Mono,"  <head>
+    <meta http%-equiv=""Content%-Type"" content=""text/html;charset=utf%-8"" >
+    <link href='http://fonts.googleapis.com/css%?family=Droid%+Sans%+Mono' rel='stylesheet' type='text/css'>
+    <style type=""text/css"">
+      body {"
+AchaeaChatTabs.mpackage,emco.lua,1261,Network Identifiers,https://wiki.mudlet.org/w/Manual:Lua_Functions#getTime,"  if strippedFormat ~= """" then
+    self.ae(funcName,
+            ""format contains invalid time format characters. Please see https://wiki.mudlet.org/w/Manual:Lua_Functions#getTime for formatting information"")
+  else
+    self.timestampFormat = format"
+AchaeaChatTabs.mpackage,emco.lua,2229,Unsafe Inputs,load(,"
+
+function EMCO:load()
+  local dirname = getMudletHomeDir() .. ""/EMCO/""
+  local filename = dirname .. self.name .. "".lua"""
+AchaeaChatTabs.mpackage,emco.lua,2234,Unsafe Inputs,load(,"  local configTable = {}
+  if io.exists(filename) then
+    table.load(filename, configTable)
+  else
+    debugc(string.format(""Attempted to load config for EMCO named %s but the file could not be found. Filename: %s"", self.name, filename))"
 dartmudlet-1.8.5.zip,SCRIPTS/scripts_allocs.lua,619,Unsafe Inputs,load(,"
 	Status.allocCurrentDisplay = 1
 	Allocs.load()
@@ -359,68 +315,183 @@ dartmudlet-1.8.5.zip,_core.lua,76,Unsafe Inputs,load(,"	for i,module in ipairs(m
 			module.load()
 		end
 	end"
+MDK.mpackage,demontools.lua,61,Network Identifiers,http://www.w3.org/TR/html4/loose.dtd,"
+local htmlHeader = [=[  <!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.01 Transitional//EN""
+""http://www.w3.org/TR/html4/loose.dtd"">
+<html>
+  <head>"
+MDK.mpackage,demontools.lua,65,Network Identifiers,http://fonts.googleapis.com/css?family=Droid+Sans+Mono,"  <head>
+    <meta http-equiv=""Content-Type"" content=""text/html;charset=utf-8"" >
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <style type=""text/css"">
+      body {"
+MDK.mpackage,demontools.lua,79,Network Identifiers,http://www.w3.org/TR/html4/loose.dtd,"
+local htmlHeaderPattern = [=[  <!DOCTYPE HTML PUBLIC ""%-//W3C//DTD HTML 4.01 Transitional//EN""
+""http://www.w3.org/TR/html4/loose.dtd"">
+<html>
+  <head>"
+MDK.mpackage,demontools.lua,83,Network Identifiers,http://fonts.googleapis.com/css%?family=Droid%+Sans%+Mono,"  <head>
+    <meta http%-equiv=""Content%-Type"" content=""text/html;charset=utf%-8"" >
+    <link href='http://fonts.googleapis.com/css%?family=Droid%+Sans%+Mono' rel='stylesheet' type='text/css'>
+    <style type=""text/css"">
+      body {"
+MDK.mpackage,demontools.lua,98,Unsafe Inputs,loadstring(,"
+local function getValueAt(accessString)
+  local ok, err = pcall(loadstring(""return "" .. tostring(accessString)))
+  if ok then return err end
+  return nil, err"
+MDK.mpackage,echofile.lua,15,Unsafe Inputs,loadstring(,"if _VERSION == ""Lua 5.1"" then
+  load = function(code, name, _, env)
+    local fn, err = loadstring(code, name)
+    if fn then
+      setfenv(fn, env)"
+MDK.mpackage,echofile.lua,46,Unsafe Inputs,load(,"      end,
+    })
+    local fn, err = load(""return "" .. code, ""expression `"" .. code .. ""`"", ""t"", exp_env)
+    if fn then
+      return tostring(fn())"
+MDK.mpackage,emco.lua,1261,Network Identifiers,https://wiki.mudlet.org/w/Manual:Lua_Functions#getTime,"  if strippedFormat ~= """" then
+    self.ae(funcName,
+            ""format contains invalid time format characters. Please see https://wiki.mudlet.org/w/Manual:Lua_Functions#getTime for formatting information"")
+  else
+    self.timestampFormat = format"
+MDK.mpackage,emco.lua,2229,Unsafe Inputs,load(,"
+
+function EMCO:load()
+  local dirname = getMudletHomeDir() .. ""/EMCO/""
+  local filename = dirname .. self.name .. "".lua"""
+MDK.mpackage,emco.lua,2234,Unsafe Inputs,load(,"  local configTable = {}
+  if io.exists(filename) then
+    table.load(filename, configTable)
+  else
+    debugc(string.format(""Attempted to load config for EMCO named %s but the file could not be found. Filename: %s"", self.name, filename))"
+MDK.mpackage,loginator.lua,59,Network Identifiers,http://www.w3.org/TR/html4/loose.dtd,"
+local htmlHeaderTemplate = [=[  <!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.01 Transitional//EN""
+""http://www.w3.org/TR/html4/loose.dtd"">
+<html>
+  <head>"
+MDK.mpackage,loginator.lua,63,Network Identifiers,http://fonts.googleapis.com/css?family=Droid+Sans+Mono,"  <head>
+    <meta http-equiv=""Content-Type"" content=""text/html;charset=utf-8"" >
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <style type=""text/css"">
+      body {"
+MDK.mpackage,loginator.lua,410,External Communications,openUrl(,"
+function Loginator:open()
+  openUrl(self:getFullFilename())
+end
+"
+MDK.mpackage,loginator.lua,415,External Communications,openUrl(,"
+function Loginator:openDir()
+  openUrl(self:getPath())
+end
+"
+MDK.mpackage,spinbox.lua,16,Network Identifiers,https://demonnic.github.io/image-assets/uparrow.png,"  inactiveButtonColor = ""DimGray"",
+  integer = true,
+  upArrowLocation = ""https://demonnic.github.io/image-assets/uparrow.png"",
+  downArrowLocation = ""https://demonnic.github.io/image-assets/downarrow.png"",
+  color = ""#202020"""
+MDK.mpackage,spinbox.lua,17,Network Identifiers,https://demonnic.github.io/image-assets/downarrow.png,"  integer = true,
+  upArrowLocation = ""https://demonnic.github.io/image-assets/uparrow.png"",
+  downArrowLocation = ""https://demonnic.github.io/image-assets/downarrow.png"",
+  color = ""#202020""
+}"
+MDK.mpackage,spinbox.lua,309,External Communications,downloadFile(,"    end
+    if upURL:match(""^http"") then
+      self:downloadFile(upURL, upFile)
+    elseif io.exists(upURL) then
+      upFile = upURL"
+MDK.mpackage,spinbox.lua,323,External Communications,downloadFile(,"    end
+    if downURL:match(""^http"") then
+      self:downloadFile(downURL, downFile)
+    elseif io.exists(downURL) then
+      downFile = downURL"
+MDK.mpackage,spinbox.lua,346,External Communications,downloadFile(,"
+
+function spinbox:downloadFile(url, fileName)
+  local parts = fileName:split(""/"")
+  parts[#parts] = nil"
+MDK.mpackage,spinbox.lua,371,External Communications,downloadFile(,"  registerNamedEventHandler(uname, handlerName .. ""done"", ""sysDownloadDone"", handler, true)
+  registerNamedEventHandler(uname, handlerName .. ""error"", ""sysDownloadError"", handler, true)
+  downloadFile(fileName, url)
+end
+"
+MDK.mpackage,spinbox.lua,379,Unsafe Inputs,load(,"  local locations = {}
+  if io.exists(saveFile) then
+    table.load(saveFile, locations)
+  end
+  return locations"
+MDK.mpackage,sug.lua,20,Unsafe Inputs,loadstring(,"
+local function getValueAt(accessString)
+  local ok, err = pcall(loadstring(""return "" .. tostring(accessString)))
+  if ok then return err end
+  return nil, err"
+MDK.mpackage,timergauge.lua,236,Unsafe Inputs,loadstring(,"  local hooktype = type(hook)
+  if hooktype == ""string"" then
+    local f, e = loadstring(""return "" .. hook)
+    if not f then
+      f, e = loadstring(hook)"
+MDK.mpackage,timergauge.lua,238,Unsafe Inputs,loadstring(,"    local f, e = loadstring(""return "" .. hook)
+    if not f then
+      f, e = loadstring(hook)
+    end
+    if not f then"
+i18n-support-for-mudlet-scripts.mpackage,i18n/init.lua,174,Unsafe Inputs,load(,"end
+
+function i18n.load(data)
+  recursiveLoad(nil, data)
+end"
+i18n-support-for-mudlet-scripts.mpackage,i18n/init.lua,179,Unsafe Inputs,loadfile(,"
+function i18n.loadFile(path)
+  local chunk = assert(loadfile(path))
+  local data = chunk()
+  i18n.load(data)"
+i18n-support-for-mudlet-scripts.mpackage,i18n/init.lua,181,Unsafe Inputs,load(,"  local chunk = assert(loadfile(path))
+  local data = chunk()
+  i18n.load(data)
+end
+"
+MedUI.mpackage,demontools.lua,61,Network Identifiers,http://www.w3.org/TR/html4/loose.dtd,"
+local htmlHeader = [=[  <!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.01 Transitional//EN""
+""http://www.w3.org/TR/html4/loose.dtd"">
+<html>
+  <head>"
+MedUI.mpackage,demontools.lua,65,Network Identifiers,http://fonts.googleapis.com/css?family=Droid+Sans+Mono,"  <head>
+    <meta http-equiv=""Content-Type"" content=""text/html;charset=utf-8"" >
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <style type=""text/css"">
+      body {"
+MedUI.mpackage,demontools.lua,79,Network Identifiers,http://www.w3.org/TR/html4/loose.dtd,"
+local htmlHeaderPattern = [=[  <!DOCTYPE HTML PUBLIC ""%-//W3C//DTD HTML 4.01 Transitional//EN""
+""http://www.w3.org/TR/html4/loose.dtd"">
+<html>
+  <head>"
+MedUI.mpackage,demontools.lua,83,Network Identifiers,http://fonts.googleapis.com/css%?family=Droid%+Sans%+Mono,"  <head>
+    <meta http%-equiv=""Content%-Type"" content=""text/html;charset=utf%-8"" >
+    <link href='http://fonts.googleapis.com/css%?family=Droid%+Sans%+Mono' rel='stylesheet' type='text/css'>
+    <style type=""text/css"">
+      body {"
+MedUI.mpackage,demontools.lua,98,Unsafe Inputs,loadstring(,"
+local function getValueAt(accessString)
+  local ok, err = pcall(loadstring(""return "" .. tostring(accessString)))
+  if ok then return err end
+  return nil, err"
+MedUI.mpackage,emco.lua,1261,Network Identifiers,https://wiki.mudlet.org/w/Manual:Lua_Functions#getTime,"    if strippedFormat ~= """" then
+      self.ae(funcName,
+              ""format contains invalid time format characters. Please see https://wiki.mudlet.org/w/Manual:Lua_Functions#getTime for formatting information"")
+    else
+      self.timestampFormat = format"
+MedUI.mpackage,emco.lua,2229,Unsafe Inputs,load(,"  
+  
+  function EMCO:load()
+    local dirname = getMudletHomeDir() .. ""/EMCO/""
+    local filename = dirname .. self.name .. "".lua"""
+MedUI.mpackage,emco.lua,2234,Unsafe Inputs,load(,"    local configTable = {}
+    if io.exists(filename) then
+      table.load(filename, configTable)
+    else
+      debugc(string.format(""Attempted to load config for EMCO named %s but the file could not be found. Filename: %s"", self.name, filename))"
 PRS.mpackage,AdjustableTabWindow.lua,1114,Unsafe Inputs,load(,"
 
 function Adjustable.TabWindow:load(slot, dir)
     if type(self) ~= ""table"" then
         dir = slot"
-PRS.mpackage,AdjustableTabWindow.lua,1128,Unsafe Inputs,load(,"    local mytable = {}
-    if io.exists(loadDir) then
-        table.load(loadDir, mytable)
-    else
-        return ""No saved settings found at: "" .. loadDir"
-PRS.mpackage,AdjustableTabWindow.lua,1163,Unsafe Inputs,load(,"                tempStyleWindow:createTempWindow(nil, k)
-            end
-            Adjustable.TabWindow.all[k].container.container:load(slot, dir)
-            if v.windowname ~= ""main"" then
-                Adjustable.TabWindow.all[k].container.container:changeContainer("
-PRS.mpackage,AdjustableTabWindow.lua,1212,Unsafe Inputs,load(,"                    end
-                    
-                    myTab:load(slot, dir)
-                end
-            end"
-PRS.mpackage,AdjustableTabWindow.lua,1353,Unsafe Inputs,load(,"    end
-    emco.load = function(s, slot, dir)
-        EMCO.load(s)
-        self:load(slot, dir)
-    end"
-PRS.mpackage,AdjustableTabWindow.lua,1354,Unsafe Inputs,load(,"    emco.load = function(s, slot, dir)
-        EMCO.load(s)
-        self:load(slot, dir)
-    end
-end"
-PRS.mpackage,demontools.lua,98,Unsafe Inputs,loadstring(,"
-local function getValueAt(accessString)
-  local ok, err = pcall(loadstring(""return "" .. tostring(accessString)))
-  if ok then return err end
-  return nil, err"
-PRS.mpackage,emco.lua,2229,Unsafe Inputs,load(,"
-
-function EMCO:load()
-  local dirname = getMudletHomeDir() .. ""/EMCO/""
-  local filename = dirname .. self.name .. "".lua"""
-PRS.mpackage,emco.lua,2234,Unsafe Inputs,load(,"  local configTable = {}
-  if io.exists(filename) then
-    table.load(filename, configTable)
-  else
-    debugc(string.format(""Attempted to load config for EMCO named %s but the file could not be found. Filename: %s"", self.name, filename))"
-PRS.mpackage,sug.lua,20,Unsafe Inputs,loadstring(,"
-local function getValueAt(accessString)
-  local ok, err = pcall(loadstring(""return "" .. tostring(accessString)))
-  if ok then return err end
-  return nil, err"
-demonhighlighter.mpackage,config.lua,157,Unsafe Inputs,load(,"  * use with caution
-  * really really
-* `Highlighter:load(silent)`
-  * loads the configuration and items for the Highlighter from disk
-  * if silent is true, then it will not echo to the main console"
-LusterniaChatTabs.mpackage,emco.lua,2137,Unsafe Inputs,load(,"
-
-function EMCO:load()
-  local dirname = getMudletHomeDir() .. ""/EMCO/""
-  local filename = dirname .. self.name .. "".lua"""
-LusterniaChatTabs.mpackage,emco.lua,2142,Unsafe Inputs,load(,"  local configTable = {}
-  if io.exists(filename) then
-    table.load(filename, configTable)
-  else
-    debugc(string.format(""Attempted to load config for EMCO named %s but the file could not be found. Filename: %s"", self.name, filename))"
