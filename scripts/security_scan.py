@@ -18,6 +18,15 @@ SUSPICIOUS_PATTERNS = [
     r"socket\.connect",
     r"socket\.http",
     r"http\.request",
+    r"getHTTP\s*\(",
+    r"postHTTP\s*\(",
+    r"putHTTP\s*\(",
+    r"deleteHTTP\s*\(",
+    r"customHTTP\s*\(",
+    r"installPackage\s*\(",
+    r"uninstallPackage\s*\(",
+    r"unzipAsync\s*\(",
+    r"openWebPage\s*\(",
 ]
 
 ALLOWED_EXTS = (".mpackage", ".zip", ".lua", ".xml", ".txt", ".json", ".md")

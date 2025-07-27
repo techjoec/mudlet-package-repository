@@ -17,6 +17,17 @@ PATTERNS = {
         (r'\bsocket\.http\s*[\.:]', 'socket.http'),
         (r'\bopenUrl\s*\(', 'openUrl'),
         (r'\bdownloadFile\s*\(', 'downloadFile'),
+        (r'\bgetHTTP\s*\(', 'getHTTP'),
+        (r'\bpostHTTP\s*\(', 'postHTTP'),
+        (r'\bputHTTP\s*\(', 'putHTTP'),
+        (r'\bdeleteHTTP\s*\(', 'deleteHTTP'),
+        (r'\bcustomHTTP\s*\(', 'customHTTP'),
+        (r'\bopenWebPage\s*\(', 'openWebPage'),
+    ],
+    'Package Management': [
+        (r'\binstallPackage\s*\(', 'installPackage'),
+        (r'\buninstallPackage\s*\(', 'uninstallPackage'),
+        (r'\bunzipAsync\s*\(', 'unzipAsync'),
     ],
     # literal addresses or URLs embedded in code
     'Network Identifiers': [
