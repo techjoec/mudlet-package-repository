@@ -57,6 +57,39 @@ def scan_package(path, remaining):
     return results
 
 
+def write_html(results, path='scan_report.html'):
+    """Write a human readable HTML report."""
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write('<!DOCTYPE html><html><head><meta charset="utf-8">')
+        f.write('<title>Scan Report</title>')
+        f.write('<style>table{border-collapse:collapse} th,td{border:1px solid #ccc;padding:4px;} th{background:#eee}</style>')
+        f.write('</head><body>')
+        f.write('<h1>Scan Report</h1>')
+        if not results:
+            f.write('<p>No matches found.</p>')
+            f.write('</body></html>')
+            return
+
+        f.write('<table>')
+        headers = ['Package', 'File', 'Line', 'Category', 'Match', 'Context']
+        f.write('<tr>' + ''.join(f'<th>{h}</th>' for h in headers) + '</tr>')
+        for row in results:
+            context = (row['context']
+                        .replace('&', '&amp;')
+                        .replace('<', '&lt;')
+                        .replace('>', '&gt;')
+                        .replace('\n', '<br>'))
+            f.write('<tr>'
+                    f'<td>{row["package"]}</td>'
+                    f'<td>{row["file"]}</td>'
+                    f'<td>{row["line_number"]}</td>'
+                    f'<td>{row["category"]}</td>'
+                    f'<td>{row["matched"]}</td>'
+                    f'<td>{context}</td>'
+                    '</tr>')
+        f.write('</table></body></html>')
+
+
 def main():
     pkg_dir = Path('packages')
     package_files = list(pkg_dir.glob('*.mpackage')) + list(pkg_dir.glob('*.zip'))
@@ -75,6 +108,8 @@ def main():
         writer.writeheader()
         for row in results:
             writer.writerow(row)
+
+    write_html(results)
 
 
 if __name__ == '__main__':
