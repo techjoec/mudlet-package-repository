@@ -4,15 +4,16 @@ on:
   push:
     paths:
       - 'packages/**'
+      - 'packages/mpkg.packages.json'
   pull_request:
     paths:
-      - 'packages/**'
+      - '**'
 
 jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -20,10 +21,14 @@ jobs:
       - name: Run security scan
         id: scan
         run: |
-          python scripts/security_scan.py | tee scan.log
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            python scripts/security_scan.py --throttle 3 | tee scan.log
+          else
+            python scripts/security_scan.py --only-not-scanned --throttle 3 | tee scan.log
+          fi
         continue-on-error: true
       - name: Upload scan log
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: scan-log
           path: scan.log
