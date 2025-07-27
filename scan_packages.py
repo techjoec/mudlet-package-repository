@@ -2,6 +2,7 @@ import zipfile
 import re
 from pathlib import Path
 import csv
+import dns.resolver
 
 PATTERNS = {
     # explicit function calls that could execute external processes
@@ -35,6 +36,38 @@ PATTERNS = {
 IGNORED_PACKAGES = {"MudletBusted.mpackage"}
 
 CONTEXT_LINES = 2
+
+PUBLIC_HOST_PATTERNS = [
+    r"\.github\.io$",
+    r"\.gitlab\.io$",
+    r"\.bitbucket\.io$",
+    r"gist\.github\.com$",
+    r"pastebin\.com$",
+    r"raw\.githubusercontent\.com$",
+    r"\.amazonaws\.com$",
+    r"\.cloudfront\.net$",
+    r"\.azurewebsites\.net$",
+    r"\.pages\.dev$",
+]
+
+
+def check_domain_status(domain: str) -> str:
+    """Return status for a domain: Unregistered, Public Host, or Resolved."""
+    if not domain:
+        return ""
+    try:
+        dns.resolver.resolve(domain, "A")
+        resolved = True
+    except dns.resolver.NXDOMAIN:
+        return "Unregistered"
+    except Exception:
+        resolved = False
+
+    for pattern in PUBLIC_HOST_PATTERNS:
+        if re.search(pattern, domain):
+            return "Publicly Writable"
+
+    return "Resolved" if resolved else "Unknown"
 
 
 def remove_comments(text: str) -> str:
@@ -142,6 +175,7 @@ def scan_package(path):
                         'address': address,
                         'domain': domain,
                         'uri': uri,
+                        'domain_status': check_domain_status(domain),
                     })
     except zipfile.BadZipFile:
         pass
@@ -162,7 +196,7 @@ def write_html(results, path='scan_report.html'):
             return
 
         f.write('<table>')
-        headers = ['Package', 'File', 'Line', 'Category', 'Match', 'Address', 'Domain/IP', 'URI', 'Context']
+        headers = ['Package', 'File', 'Line', 'Category', 'Match', 'Address', 'Domain/IP', 'Domain Status', 'URI', 'Context']
         f.write('<tr>' + ''.join(f'<th>{h}</th>' for h in headers) + '</tr>')
         for row in results:
             context = (row['context']
@@ -178,6 +212,7 @@ def write_html(results, path='scan_report.html'):
                     f'<td>{row["matched"]}</td>'
                     f'<td>{row.get("address", "")}</td>'
                     f'<td>{row.get("domain", "")}</td>'
+                    f'<td>{row.get("domain_status", "")}</td>'
                     f'<td>{row.get("uri", "")}</td>'
                     f'<td>{context}</td>'
                     '</tr>')
@@ -186,7 +221,7 @@ def write_html(results, path='scan_report.html'):
 
 def write_csv(results, path='scan_report.csv'):
     """Write a CSV report with simple headers."""
-    headers = ['Package', 'File', 'Line', 'Category', 'Match', 'Address', 'Domain/IP', 'URI', 'Context']
+    headers = ['Package', 'File', 'Line', 'Category', 'Match', 'Address', 'Domain/IP', 'Domain Status', 'URI', 'Context']
     with open(path, 'w', encoding='utf-8', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(headers)
@@ -199,6 +234,7 @@ def write_csv(results, path='scan_report.csv'):
                 row['matched'],
                 row.get('address', ''),
                 row.get('domain', ''),
+                row.get('domain_status', ''),
                 row.get('uri', ''),
                 row['context'].replace('\n', '\\n')
             ])
