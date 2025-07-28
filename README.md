@@ -40,21 +40,15 @@ Contribute your mpackage using Github's "[fork and pull request](https://docs.gi
 
 Using Docker, run `./mpkg/muddle` or run Muddler [manually](https://github.com/demonnic/muddler/wiki/Installation) to generate the new `./mpkg/build/mpkg.mpackage` file can be loaded into Mudlet as a module.
 
-### Running Scans ###
+### Package Scanning ###
 
-Install the Python dependencies before executing `scan_packages.py` or
-`scripts/security_scan.py`:
+Install the Python dependencies before running `scan_packages.py` or `scripts/security_scan.py`:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Then run either script as needed:
-
-```bash
-python scan_packages.py
-python scripts/security_scan.py
-```
+Run `scan_packages.py` to scan each package for risky Lua patterns. The script generates `scan_report.html` and `scan_report.csv` detailing any matches found. For quick checks you can also run `scripts/security_scan.py`.
 
 ### New `mpkg` release
 
