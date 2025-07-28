@@ -40,6 +40,10 @@ Contribute your mpackage using Github's "[fork and pull request](https://docs.gi
 
 Using Docker, run `./mpkg/muddle` or run Muddler [manually](https://github.com/demonnic/muddler/wiki/Installation) to generate the new `./mpkg/build/mpkg.mpackage` file can be loaded into Mudlet as a module.
 
+### Package Scanning ###
+
+Maintain the repository by running `scan_packages.py` which scans each package for potentially risky Lua patterns. The script outputs `scan_report.html` detailing any matches found.
+
 ### New `mpkg` release
 
 To make a new mpkg release, bump the version in [mpkg/mfile](mpkg/mfile) and the rest will happen automatically.
