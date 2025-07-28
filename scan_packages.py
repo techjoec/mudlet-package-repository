@@ -1,34 +1,63 @@
-import zipfile
-import re
-from pathlib import Path
+"""Utility to scan packages for potentially risky Lua patterns."""
 
-PATTERNS = {
-    # explicit function calls that could execute external processes
-    'Process Spawning': [
-        (r'\bos\.execute\s*\(', 'os.execute'),
-        (r'\bio\.popen\s*\(', 'io.popen'),
-        (r'\bspawn\s*\(', 'spawn'),
-    ],
-    # network activity via LuaSocket or Mudlet helpers
-    'External Communications': [
-        (r'require\s*\(?["\']socket\.http["\']\)?', 'require'),
-        (r'\bsocket\.http\s*[\.:]', 'socket.http'),
-        (r'\bopenUrl\s*\(', 'openUrl'),
-        (r'\bdownloadFile\s*\(', 'downloadFile'),
-    ],
-    # literal addresses or URLs embedded in code
-    'Network Identifiers': [
-        (r'((?:https?|ftp)://[^\s"\']+)', ''),
-        (r'((?:\d{1,3}\.){3}\d{1,3})', ''),
-    ],
-    # running code from strings or files
-    'Unsafe Inputs': [
-        (r'\bloadstring\s*\(', 'loadstring'),
-        (r'\bdofile\s*\(', 'dofile'),
-        (r'\bloadfile\s*\(', 'loadfile'),
-        (r'\bload\s*\(', 'load'),
-    ],
-}
+from dataclasses import dataclass
+from pathlib import Path
+import re
+import zipfile
+
+
+@dataclass
+class ScanResult:
+    package: str
+    file: str
+    line_number: int
+    context: str
+    matched: str
+    category: str
+    address: str
+
+
+@dataclass
+class PatternCategory:
+    name: str
+    patterns: list[tuple[re.Pattern, str]]
+
+
+PATTERNS: list[PatternCategory] = [
+    PatternCategory(
+        "Process Spawning",
+        [
+            (re.compile(r"\bos\.execute\s*\("), "os.execute"),
+            (re.compile(r"\bio\.popen\s*\("), "io.popen"),
+            (re.compile(r"\bspawn\s*\("), "spawn"),
+        ],
+    ),
+    PatternCategory(
+        "External Communications",
+        [
+            (re.compile(r"require\s*\(?['\"]socket\.http['\"]\)?"), "require"),
+            (re.compile(r"\bsocket\.http\s*[\.:]"), "socket.http"),
+            (re.compile(r"\bopenUrl\s*\("), "openUrl"),
+            (re.compile(r"\bdownloadFile\s*\("), "downloadFile"),
+        ],
+    ),
+    PatternCategory(
+        "Network Identifiers",
+        [
+            (re.compile(r"((?:https?|ftp)://[^\s'\"]+)"), ""),
+            (re.compile(r"((?:\d{1,3}\.){3}\d{1,3})"), ""),
+        ],
+    ),
+    PatternCategory(
+        "Unsafe Inputs",
+        [
+            (re.compile(r"\bloadstring\s*\("), "loadstring"),
+            (re.compile(r"\bdofile\s*\("), "dofile"),
+            (re.compile(r"\bloadfile\s*\("), "loadfile"),
+            (re.compile(r"\bload\s*\("), "load"),
+        ],
+    ),
+]
 
 # packages that should be ignored during scanning
 IGNORED_PACKAGES = {"MudletBusted.mpackage"}
@@ -87,29 +116,34 @@ def strip_description_blocks(text: str) -> str:
     return '\n'.join(output)
 
 
-def find_matches(text, regexes):
-    matches = []
+def find_matches(text: str, categories: list[PatternCategory]):
+    """Return pattern matches found in the provided text."""
+    matches: list[tuple[int, str, str, str, str, str]] = []
     text = remove_comments(text)
     text = strip_description_blocks(text)
     lines = text.splitlines()
     for idx, line in enumerate(lines, 1):
-        for category, regs in regexes.items():
-            for reg, token in regs:
-                m = re.search(reg, line)
-                if m:
-                    if token and (re.search(rf'(?:^|\s)(?:local\s+)?function\s+{re.escape(token)}\b', line) or \
-                                 re.search(rf'{re.escape(token)}\s*=\s*function\b', line)):
-                        continue
-                    start = max(0, idx - CONTEXT_LINES - 1)
-                    end = min(len(lines), idx + CONTEXT_LINES)
-                    context = '\n'.join(lines[start:end])
-                    address = m.group(1) if category == 'Network Identifiers' else ''
-                    matches.append((idx, context, line.strip(), m.group(0), category, address))
+        for cat in categories:
+            for reg, token in cat.patterns:
+                m = reg.search(line)
+                if not m:
+                    continue
+                if token and (
+                    re.search(rf"(?:^|\s)(?:local\s+)?function\s+{re.escape(token)}\b", line)
+                    or re.search(rf"{re.escape(token)}\s*=\s*function\b", line)
+                ):
+                    continue
+                start = max(0, idx - CONTEXT_LINES - 1)
+                end = min(len(lines), idx + CONTEXT_LINES)
+                context = "\n".join(lines[start:end])
+                address = m.group(1) if cat.name == "Network Identifiers" else ""
+                matches.append((idx, context, line.strip(), m.group(0), cat.name, address))
     return matches
 
 
-def scan_package(path):
-    results = []
+def scan_package(path: Path) -> list[ScanResult]:
+    """Scan a single package archive for matches."""
+    results: list[ScanResult] = []
     try:
         with zipfile.ZipFile(path) as z:
             for member in z.namelist():
@@ -119,15 +153,17 @@ def scan_package(path):
                     text = f.read().decode('utf-8', errors='ignore')
                 matches = find_matches(text, PATTERNS)
                 for idx, context, line, match, category, address in matches:
-                    results.append({
-                        'package': path.name,
-                        'file': member,
-                        'line_number': idx,
-                        'context': context,
-                        'matched': match,
-                        'category': category,
-                        'address': address,
-                    })
+                    results.append(
+                        ScanResult(
+                            package=path.name,
+                            file=member,
+                            line_number=idx,
+                            context=context,
+                            matched=match,
+                            category=category,
+                            address=address,
+                        )
+                    )
     except zipfile.BadZipFile:
         pass
     return results
@@ -150,20 +186,23 @@ def write_html(results, path='scan_report.html'):
         headers = ['Package', 'File', 'Line', 'Category', 'Match', 'Address', 'Context']
         f.write('<tr>' + ''.join(f'<th>{h}</th>' for h in headers) + '</tr>')
         for row in results:
-            context = (row['context']
-                        .replace('&', '&amp;')
-                        .replace('<', '&lt;')
-                        .replace('>', '&gt;')
-                        .replace('\n', '<br>'))
-            f.write('<tr>'
-                    f'<td>{row["package"]}</td>'
-                    f'<td>{row["file"]}</td>'
-                    f'<td>{row["line_number"]}</td>'
-                    f'<td>{row["category"]}</td>'
-                    f'<td>{row["matched"]}</td>'
-                    f'<td>{row.get("address", "")}</td>'
-                    f'<td>{context}</td>'
-                    '</tr>')
+            context = (
+                row.context.replace('&', '&amp;')
+                .replace('<', '&lt;')
+                .replace('>', '&gt;')
+                .replace('\n', '<br>')
+            )
+            f.write(
+                '<tr>'
+                f'<td>{row.package}</td>'
+                f'<td>{row.file}</td>'
+                f'<td>{row.line_number}</td>'
+                f'<td>{row.category}</td>'
+                f'<td>{row.matched}</td>'
+                f'<td>{row.address}</td>'
+                f'<td>{context}</td>'
+                '</tr>'
+            )
         f.write('</table></body></html>')
 
 
@@ -171,7 +210,7 @@ def main():
     pkg_dir = Path('packages')
     package_files = [p for p in pkg_dir.glob('*.mpackage')] + list(pkg_dir.glob('*.zip'))
     package_files = [p for p in package_files if p.name not in IGNORED_PACKAGES]
-    results = []
+    results: list[ScanResult] = []
     for pkg in package_files:
         results.extend(scan_package(pkg))
 

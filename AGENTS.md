@@ -1,7 +1,7 @@
 # Agent Instructions
 
 - This repository contains scripts to manage and scan Mudlet packages.
-- Use `scan_packages.py` to analyze packages in the `packages/` directory for risky Lua patterns.
+- Use `scan_packages.py` to analyze packages in the `packages/` directory for risky Lua patterns. The scanner is organized around `dataclasses` for pattern definitions and results.
 - The scan processes all packages and produces `scan_report.html` with columns: package, file, line number, category, matched text, address, and context.
 - Ignore the `MudletBusted.mpackage` file when scanning packages.
 - Do not mark packages as scanned; this repository is currently in testing.
