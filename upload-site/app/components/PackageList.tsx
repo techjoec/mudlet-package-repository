@@ -81,7 +81,7 @@ export const PackageList = ({ packages, limit, sortBy, reverse, hideLinks }: Pac
               <div className="flex-grow">
                 <h2 className="text-xl font-semibold mb-2">
                   <a
-                    href={`https://github.com/Mudlet/mudlet-package-repository/raw/refs/heads/checker/packages/${pkg.filename}`}
+                    href={`https://github.com/Mudlet/mudlet-package-repository/raw/refs/heads/main/packages/${pkg.filename}`}
                     className="text-blue-600 hover:text-blue-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                     onClick={(e) => e.stopPropagation()}
                     aria-label={`Download ${pkg.mpackage} package`}
@@ -103,7 +103,7 @@ export const PackageList = ({ packages, limit, sortBy, reverse, hideLinks }: Pac
               <div className="flex-shrink-0 flex flex-col">
                   {pkg.icon && (
                     <Image
-                      src={`https://raw.githubusercontent.com/Mudlet/mudlet-package-repository/refs/heads/checker/${pkg.icon}`}
+                      src={`https://raw.githubusercontent.com/Mudlet/mudlet-package-repository/refs/heads/main/${pkg.icon}`}
                       alt={`${pkg.mpackage} icon`}
                       width={48}
                       height={48}
