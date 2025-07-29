@@ -4,6 +4,8 @@ from dataclasses import dataclass
 from pathlib import Path
 import re
 import zipfile
+import csv
+import dns.resolver
 
 
 @dataclass
@@ -15,6 +17,9 @@ class ScanResult:
     matched: str
     category: str
     address: str
+    domain: str = ""
+    domain_status: str = ""
+    uri: str = ""
 
 
 @dataclass
@@ -39,6 +44,20 @@ PATTERNS: list[PatternCategory] = [
             (re.compile(r"\bsocket\.http\s*[\.:]"), "socket.http"),
             (re.compile(r"\bopenUrl\s*\("), "openUrl"),
             (re.compile(r"\bdownloadFile\s*\("), "downloadFile"),
+            (re.compile(r"\bgetHTTP\s*\("), "getHTTP"),
+            (re.compile(r"\bpostHTTP\s*\("), "postHTTP"),
+            (re.compile(r"\bputHTTP\s*\("), "putHTTP"),
+            (re.compile(r"\bdeleteHTTP\s*\("), "deleteHTTP"),
+            (re.compile(r"\bcustomHTTP\s*\("), "customHTTP"),
+            (re.compile(r"\bopenWebPage\s*\("), "openWebPage"),
+        ],
+    ),
+    PatternCategory(
+        "Package Management",
+        [
+            (re.compile(r"\binstallPackage\s*\("), "installPackage"),
+            (re.compile(r"\buninstallPackage\s*\("), "uninstallPackage"),
+            (re.compile(r"\bunzipAsync\s*\("), "unzipAsync"),
         ],
     ),
     PatternCategory(
@@ -59,10 +78,41 @@ PATTERNS: list[PatternCategory] = [
     ),
 ]
 
-# packages that should be ignored during scanning
 IGNORED_PACKAGES = {"MudletBusted.mpackage"}
 
 CONTEXT_LINES = 2
+
+PUBLIC_HOST_PATTERNS = [
+    r"\.github\.io$",
+    r"\.gitlab\.io$",
+    r"\.bitbucket\.io$",
+    r"gist\.github\.com$",
+    r"pastebin\.com$",
+    r"raw\.githubusercontent\.com$",
+    r"\.amazonaws\.com$",
+    r"\.cloudfront\.net$",
+    r"\.azurewebsites\.net$",
+    r"\.pages\.dev$",
+]
+
+
+def check_domain_status(domain: str) -> str:
+    """Return status for a domain: Unregistered, Public Host, or Resolved."""
+    if not domain:
+        return ""
+    try:
+        dns.resolver.resolve(domain, "A")
+        resolved = True
+    except dns.resolver.NXDOMAIN:
+        return "Unregistered"
+    except Exception:
+        resolved = False
+
+    for pattern in PUBLIC_HOST_PATTERNS:
+        if re.search(pattern, domain):
+            return "Publicly Writable"
+
+    return "Resolved" if resolved else "Unknown"
 
 
 def remove_comments(text: str) -> str:
@@ -72,21 +122,21 @@ def remove_comments(text: str) -> str:
     in_block = False
     for line in lines:
         i = 0
-        out = ''
+        out = ""
         while i < len(line):
-            if not in_block and line.startswith('--[[', i):
+            if not in_block and line.startswith("--[[", i):
                 in_block = True
                 i += 4
                 continue
             if in_block:
-                end = line.find(']]', i)
+                end = line.find("]]", i)
                 if end == -1:
                     i = len(line)
                     continue
                 i = end + 2
                 in_block = False
                 continue
-            if line.startswith('--', i):
+            if line.startswith("--", i):
                 break
             out += line[i]
             i += 1
@@ -94,7 +144,7 @@ def remove_comments(text: str) -> str:
             result.append(out)
         else:
             result.append(out)
-    return '\n'.join(result)
+    return "\n".join(result)
 
 
 def strip_description_blocks(text: str) -> str:
@@ -103,22 +153,22 @@ def strip_description_blocks(text: str) -> str:
     output = []
     in_desc = False
     for line in lines:
-        if not in_desc and re.search(r'^\s*description\s*=\s*\[\[', line):
+        if not in_desc and re.search(r"^\s*description\s*=\s*\[\[", line):
             in_desc = True
-            if ']]' in line:
+            if "]]" in line:
                 in_desc = False
             continue
         if in_desc:
-            if ']]' in line:
+            if "]]" in line:
                 in_desc = False
             continue
         output.append(line)
-    return '\n'.join(output)
+    return "\n".join(output)
 
 
 def find_matches(text: str, categories: list[PatternCategory]):
     """Return pattern matches found in the provided text."""
-    matches: list[tuple[int, str, str, str, str, str]] = []
+    matches: list[tuple[int, str, str, str, str, str, str, str]] = []
     text = remove_comments(text)
     text = strip_description_blocks(text)
     lines = text.splitlines()
@@ -136,8 +186,19 @@ def find_matches(text: str, categories: list[PatternCategory]):
                 start = max(0, idx - CONTEXT_LINES - 1)
                 end = min(len(lines), idx + CONTEXT_LINES)
                 context = "\n".join(lines[start:end])
-                address = m.group(1) if cat.name == "Network Identifiers" else ""
-                matches.append((idx, context, line.strip(), m.group(0), cat.name, address))
+                address = ""
+                domain = ""
+                uri = ""
+                if cat.name == "Network Identifiers":
+                    addr = m.group(1)
+                    if re.match(r"^(?:https?|ftp)://", addr):
+                        uri = addr
+                        domain = re.sub(r"^(?:https?|ftp)://", "", addr).split("/")[0]
+                        address = domain
+                    else:
+                        domain = addr
+                        address = addr
+                matches.append((idx, context, line.strip(), m.group(0), cat.name, address, domain, uri))
     return matches
 
 
@@ -152,7 +213,7 @@ def scan_package(path: Path) -> list[ScanResult]:
                 with z.open(member) as f:
                     text = f.read().decode('utf-8', errors='ignore')
                 matches = find_matches(text, PATTERNS)
-                for idx, context, line, match, category, address in matches:
+                for idx, context, line, match, category, address, domain, uri in matches:
                     results.append(
                         ScanResult(
                             package=path.name,
@@ -162,6 +223,9 @@ def scan_package(path: Path) -> list[ScanResult]:
                             matched=match,
                             category=category,
                             address=address,
+                            domain=domain,
+                            domain_status=check_domain_status(domain),
+                            uri=uri,
                         )
                     )
     except zipfile.BadZipFile:
@@ -169,7 +233,7 @@ def scan_package(path: Path) -> list[ScanResult]:
     return results
 
 
-def write_html(results, path='scan_report.html'):
+def write_html(results, path: str = 'scan_report.html'):
     """Write a human readable HTML report."""
     with open(path, 'w', encoding='utf-8') as f:
         f.write('<!DOCTYPE html><html><head><meta charset="utf-8">')
@@ -183,7 +247,10 @@ def write_html(results, path='scan_report.html'):
             return
 
         f.write('<table>')
-        headers = ['Package', 'File', 'Line', 'Category', 'Match', 'Address', 'Context']
+        headers = [
+            'Package', 'File', 'Line', 'Category', 'Match', 'Address',
+            'Domain/IP', 'Domain Status', 'URI', 'Context'
+        ]
         f.write('<tr>' + ''.join(f'<th>{h}</th>' for h in headers) + '</tr>')
         for row in results:
             context = (
@@ -200,10 +267,37 @@ def write_html(results, path='scan_report.html'):
                 f'<td>{row.category}</td>'
                 f'<td>{row.matched}</td>'
                 f'<td>{row.address}</td>'
+                f'<td>{row.domain}</td>'
+                f'<td>{row.domain_status}</td>'
+                f'<td>{row.uri}</td>'
                 f'<td>{context}</td>'
                 '</tr>'
             )
         f.write('</table></body></html>')
+
+
+def write_csv(results, path: str = 'scan_report.csv'):
+    """Write a CSV report with simple headers."""
+    headers = [
+        'Package', 'File', 'Line', 'Category', 'Match', 'Address',
+        'Domain/IP', 'Domain Status', 'URI', 'Context'
+    ]
+    with open(path, 'w', encoding='utf-8', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(headers)
+        for row in results:
+            writer.writerow([
+                row.package,
+                row.file,
+                row.line_number,
+                row.category,
+                row.matched,
+                row.address,
+                row.domain,
+                row.domain_status,
+                row.uri,
+                row.context.replace('\n', '\\n')
+            ])
 
 
 def main():
@@ -215,6 +309,7 @@ def main():
         results.extend(scan_package(pkg))
 
     write_html(results)
+    write_csv(results)
 
 
 if __name__ == '__main__':
