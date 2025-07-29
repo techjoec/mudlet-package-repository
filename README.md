@@ -42,7 +42,13 @@ Using Docker, run `./mpkg/muddle` or run Muddler [manually](https://github.com/d
 
 ### Package Scanning ###
 
-Maintain the repository by running `scan_packages.py` which scans each package for potentially risky Lua patterns. The script outputs `scan_report.html` detailing any matches found.
+Install the Python dependencies before running `scan_packages.py` or `scripts/security_scan.py`:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run `scan_packages.py` to scan each package for risky Lua patterns. The script generates `scan_report.html` and `scan_report.csv` detailing any matches found. For quick checks you can also run `scripts/security_scan.py`.
 
 ### New `mpkg` release
 

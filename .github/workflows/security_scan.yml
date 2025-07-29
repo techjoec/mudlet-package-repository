@@ -1,13 +1,16 @@
 name: Security Scan
 
 on:
-  push:
-    paths:
-      - 'packages/**'
-      - 'packages/mpkg.packages.json'
-  pull_request:
-    paths:
-      - '**'
+  workflow_dispatch:
+    inputs:
+      only-not-scanned:
+        description: 'Scan only packages marked as Not Scanned'
+        required: false
+        default: 'false'
+      throttle:
+        description: 'Seconds to sleep between scanning each package'
+        required: false
+        default: '3'
 
 jobs:
   scan:
@@ -21,51 +24,14 @@ jobs:
       - name: Run security scan
         id: scan
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            python scripts/security_scan.py --throttle 3 | tee scan.log
-          else
-            python scripts/security_scan.py --only-not-scanned --throttle 3 | tee scan.log
+          ARGS=""
+          if [ "${{ inputs.only-not-scanned }}" = "true" ]; then
+            ARGS="--only-not-scanned"
           fi
+          python scripts/security_scan.py $ARGS --throttle ${{ inputs.throttle }} | tee scan.log
         continue-on-error: true
       - name: Upload scan log
         uses: actions/upload-artifact@v4
         with:
           name: scan-log
           path: scan.log
-      - name: Label PR if suspicious
-        if: steps.scan.outcome == 'failure'
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const labelName = 'pending-investigation';
-            async function ensureLabel() {
-              try {
-                await github.rest.issues.getLabel({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  name: labelName
-                });
-              } catch (e) {
-                if (e.status === 404) {
-                  await github.rest.issues.createLabel({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    name: labelName,
-                    color: 'ff0000',
-                    description: 'Package flagged for investigation'
-                  });
-                } else {
-                  throw e;
-                }
-              }
-            }
-            if (context.eventName === 'pull_request') {
-              await ensureLabel();
-              await github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                labels: [labelName]
-              });
-            }
